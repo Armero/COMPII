@@ -1,0 +1,60 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2016.09.10.22.52.19;	author felipe;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mantendo o codigo atualizado por precaucao
+Nao acredito que houve alguma mudanca neste codigo
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* 
+* Universidade Federal do Rio de Janeiro
+* Escola Politecnica
+* Departamento de Eletronica e de Computacao
+* EEL270 - Computacao II - Turma 2016/2
+* Prof. Marcelo Luiz Drumond Lanza
+* Autor: Felipe Claudio da Silva Santos
+
+* $Author$
+* $Date$
+* $Log$
+*/
+
+#include<stdio.h>
+#define OK 0
+
+int main ()
+{
+  printf ("int:\n");
+  printf ("\t\t%d\n", sizeof (int) );
+
+  printf ("char:\n");
+  printf ("\t\t%d\n", sizeof (char) );
+
+  printf ("float:\n");
+  printf ("\t\t%d\n", sizeof (float) );
+
+  printf ("double:\n");
+  printf ("\t\t%d\n", sizeof (double) );
+
+  printf ("void:\n");
+  printf ("\t\t%d\n", sizeof (void) );
+
+  return (OK);
+}
+@

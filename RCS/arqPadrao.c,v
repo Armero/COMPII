@@ -1,0 +1,37 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2016.09.10.22.03.11;	author felipe;	state Exp;
+branches;
+next	;
+
+
+desc
+@Arquivo com o cabecalho utilizado para os programas
+Nao modificar
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* 
+* Universidade Federal do Rio de Janeiro
+* Escola Politecnica
+* Departamento de Eletronica e de Computacao
+* EEL270 - Computacao II - Turma 2016/2
+* Prof. Marcelo Luiz Drumond Lanza
+* Autor: Felipe Claudio da Silva Santos
+
+* $Author$
+* $Date$
+* $Log$
+*/
+@
