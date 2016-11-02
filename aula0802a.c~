@@ -1,0 +1,49 @@
+/* 
+* Universidade Federal do Rio de Janeiro
+* Escola Politecnica
+* Departamento de Eletronica e de Computacao
+* EEL270 - Computacao II - Turma 2016/2
+* Prof. Marcelo Luiz Drumond Lanza
+* Autor: Felipe Claudio da Silva Santos
+
+* $Author$
+* $Date$
+* $Log$
+*
+*/
+
+/*Espaco reservado para os includes*/
+
+#include <stdlib.h>
+#include <stdio.h>
+#include "aula0801.h"
+
+/*Fim dos includes*/
+
+
+/*Fim do espaco reservado para definir as macros*/
+
+int
+main ( int argc, char *argv[] )
+{
+  unsigned numero;
+  boolean  validade;
+  
+  if ( argc != NUMERO_ARGUMENTOS_VALIDOS)
+  {
+    printf ("Uso: %s <numero-de-argumentos-invalidos>", argv[0]);
+    printf ("Por favor insira os 10 digitos do PIS/PASEP");
+    exit (NUMERO_INVALIDO_ARGUMENTOS);
+  }
+  
+  if (argv[1] == '-')
+  {
+    printf ("Uso: %s <argumentos-invalidos>", argv[0]);
+    printf ("Por favor insira os 10 digitos do PIS/PASEP");
+    exit (ARGUMENTO_INVALIDO);
+  }
+  
+  
+  /* Caso o programa o input do usuario tenha sido feito de maneira correta*/
+  return (OK);
+} 
