@@ -5,9 +5,15 @@
 #Prof. Marcelo Luiz Drumond Lanza
 #Autor: Felipe Claudio da Silva Santos
 #
-#$Author: felipe $
-#$Date: 2016/10/22 15:10:30 $ 
+#$Author: felipe.santos $
+#$Date: 2016/11/05 23:29:54 $ 
 #$Log: Makefile,v $
+#Revision 1.15  2016/11/05 23:29:54  felipe.santos
+#Make da aula09 OK
+#
+#Revision 1.14  2016/10/31 00:22:43  felipe.santos
+#Aula 08 completa e funcionando
+#
 #Revision 1.13  2016/10/22 15:10:30  felipe
 #Aula07 adicionada e funcionando
 #
@@ -78,8 +84,9 @@ EXECS = $(EXECSAULA01)\
         $(EXECSAULA05)\
         $(EXECSAULA06)\
         $(EXECSAULA07)\
-		$(EXECSAULA07)\
-		$(EXECSAULA08)
+				$(EXECSAULA07)\
+				$(EXECSAULA08)\
+				$(EXECSAULA09)
 
 OBJS = $(AULA01OBJS)\
        $(AULA02OBJS)\
@@ -88,7 +95,8 @@ OBJS = $(AULA01OBJS)\
        $(AULA05OBJS)\
        $(AULA06OBJS)\
        $(AULA07OBJS)\
-       $(AULA08OBJS)
+       $(AULA08OBJS)\
+       $(AULA09OBJS)
 
 LIBS = libmatematica.a
 
@@ -122,35 +130,38 @@ EXECSAULA06 = aula0602
 EXECSAULA07 = aula0702
 
 EXECSAULA08 = aula0802a\
-			  aula0802b\
-			  aula0803a\
-			  aula0803b\
-			  aula0805a\
-			  aula0805b\
-			  aula0806a\
-			  aula0806b
+				      aula0802b\
+				      aula0803a\
+				      aula0803b\
+				      aula0805a\
+				      aula0805b\
+				      aula0806a\
+				      aula0806b
+
+EXECSAULA09 = aula0902\
+							aula0903
 
 #nome dos .objs
 AULA01OBJS = $(AULA01010BJS)\
-			 $(AULA01020BJS)\
-			 $(AULA01030BJS)
+				     $(AULA01020BJS)\
+				     $(AULA01030BJS)
 
 AULA02OBJS = $(AULA0202AOBJS)\
-			 $(AULA0202BOBJS)\
-			 $(AULA0202COBJS)\
-			 $(AULA0202DOBJS)
+				     $(AULA0202BOBJS)\
+				     $(AULA0202COBJS)\
+				     $(AULA0202DOBJS)
 
 
 AULA03OBJS = $(AULA0302AOBJS)\
-			 $(AULA0302BOBJS)\
-			 $(AULA0302COBJS)\
-			 $(AULA0302DOBJS)
+				     $(AULA0302BOBJS)\
+				     $(AULA0302COBJS)\
+				     $(AULA0302DOBJS)
 
 
 AULA04OBJS = $(AULA0402AOBJS)\
-			 $(AULA0402BOBJS)\
-			 $(AULA0402COBJS)\
-			 $(AULA0402DOBJS)
+				     $(AULA0402BOBJS)\
+				     $(AULA0402COBJS)\
+				     $(AULA0402DOBJS)
 
 AULA05OBJS = $(AULA0502AOBJS)\
              $(AULA0502BOBJS)\
@@ -159,18 +170,21 @@ AULA05OBJS = $(AULA0502AOBJS)\
              $(AULA0502EOBJS)
 
 
-AULA06 = $(AULA0602AOBJS)
+AULA06OBJS = $(AULA0602AOBJS)
 
-AULA07 = $(AULA0702AOBJS)
+AULA07OBJS = $(AULA0702AOBJS)
 
-AULA08 = $(AULA0802AOBJS)\
-		 $(AULA0802BOBJS)\
-		 $(AULA0803AOBJS)\
-		 $(AULA0803BOBJS)\
-		 $(AULA0805AOBJS)\
-		 $(AULA0805BOBJS)\
-		 $(AULA0806AOBJS)\
-		 $(AULA0806BOBJS)
+AULA08OBJS = $(AULA0802AOBJS)\
+				     $(AULA0802BOBJS)\
+				     $(AULA0803AOBJS)\
+				     $(AULA0803BOBJS)\
+				     $(AULA0805AOBJS)\
+				     $(AULA0805BOBJS)\
+				     $(AULA0806AOBJS)\
+				     $(AULA0806BOBJS)
+
+AULA09OBJS = $(AULA0902OBJS)\
+						 $(AULA0903OBJS)\
 
 AULA0101OBJS = aula0101.o
 AULA0102OBJS = aula0102.o
@@ -209,6 +223,9 @@ AULA0805AOBJS = aula0804.o aula0805a.o
 AULA0805BOBJS = aula0804.o aula0805b.o
 AULA0806AOBJS = aula0804.o aula0806a.o  
 AULA0806BOBJS = aula0804.o aula0806b.o
+
+AULA0902OBJS = aula0901.o aula0902.o
+AULA0903OBJS = aula0901.o aula0903.o  
 
 LIBS = $(LIBMATEMATICA)\
        $(LIBMATHC)
@@ -317,21 +334,21 @@ aula0502e:	$(AULA0502EOBJS)	$(LIBMATHC)
 	$(LD)	$(LFLAGS)	-o	$@	$(AULA0502EOBJS)	$(LIBMATHCOBJS)	-lm	
 
 
-#Regra para gerar todos os executaveis da aula 5
+#Regra para gerar todos os executaveis da aula 6
 aula06:	$(EXECSAULA06)
 
 #Regras para gerar somente um executavel
 aula0602:	$(AULA0602OBJS)	
 	$(LD)	$(LFLAGS)	-o	$@	$(AULA0602OBJS)
 
-#Regra para gerar todos os executaveis da aula 5
+#Regra para gerar todos os executaveis da aula 7
 aula07:	$(EXECSAULA07)
 
 #Regras para gerar somente um executavel
 aula0702:	$(AULA0702OBJS)	
 	$(LD)	$(LFLAGS)	-o	$@	$(AULA0702OBJS)
 
-#Regra para gerar todos os executaveis da aula 5
+#Regra para gerar todos os executaveis da aula 8
 aula08:	$(EXECSAULA08)
 
 #Regras para gerar somente um executavel
@@ -358,7 +375,18 @@ aula0806a:	$(AULA0806AOBJS)
 	
 aula0806b:	$(AULA0806BOBJS)	
 	$(LD)	$(LFLAGS)	-o	$@	$(AULA0806BOBJS)	
-		
+
+#Regra para gerar todos os executaveis da aula 9
+aula09:	$(EXECSAULA09)
+
+#Regras para gerar somente um executavel
+aula0902:	$(AULA0902OBJS)	
+	$(LD)	$(LFLAGS)	-o	$@	$(AULA0902OBJS)
+	
+#Regras para gerar somente um executavel
+aula0903:	$(AULA0903OBJS)	
+	$(LD)	$(LFLAGS)	-o	$@	$(AULA0903OBJS)
+
 #Objetivos das libs
 $(LIBMATEMATICA):	$(LIBMATEMATICAOBJS)
 	$(AR)	-r	$@	$(LIBMATEMATICAOBJS)
