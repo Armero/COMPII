@@ -5,9 +5,12 @@
 #Prof. Marcelo Luiz Drumond Lanza
 #Autor: Felipe Claudio da Silva Santos
 #
-#$Author: felipe.santos $
-#$Date: 2016/11/05 23:29:54 $ 
+#$Author: felipe $
+#$Date: 2016/11/11 01:33:28 $ 
 #$Log: Makefile,v $
+#Revision 1.16  2016/11/11 01:33:28  felipe
+#aula 10 com os codigos funcionando
+#
 #Revision 1.15  2016/11/05 23:29:54  felipe.santos
 #Make da aula09 OK
 #
@@ -69,7 +72,7 @@ AR = ar
 #CFLAGS = as flags utilizadas pelo compilador
 #LFLAGS = as flags utilazadas pelo linkeditor
 #AFLAGS = as flags utilazadas pelo compilador de bibliotecas
-CFLAGS = -Wall
+CFLAGS = -Wall -D_MY_DEBUG_
 LFLAGS = -Wall
 AFLAGS = -l
 
@@ -86,7 +89,8 @@ EXECS = $(EXECSAULA01)\
         $(EXECSAULA07)\
 				$(EXECSAULA07)\
 				$(EXECSAULA08)\
-				$(EXECSAULA09)
+				$(EXECSAULA09)\
+				$(EXECSAULA10)
 
 OBJS = $(AULA01OBJS)\
        $(AULA02OBJS)\
@@ -96,7 +100,8 @@ OBJS = $(AULA01OBJS)\
        $(AULA06OBJS)\
        $(AULA07OBJS)\
        $(AULA08OBJS)\
-       $(AULA09OBJS)
+       $(AULA09OBJS)\
+       $(AULA10OBJS)
 
 LIBS = libmatematica.a
 
@@ -141,6 +146,9 @@ EXECSAULA08 = aula0802a\
 EXECSAULA09 = aula0902\
 							aula0903
 
+EXECSAULA10 = aula1001\
+							aula1002
+
 #nome dos .objs
 AULA01OBJS = $(AULA01010BJS)\
 				     $(AULA01020BJS)\
@@ -184,7 +192,10 @@ AULA08OBJS = $(AULA0802AOBJS)\
 				     $(AULA0806BOBJS)
 
 AULA09OBJS = $(AULA0902OBJS)\
-						 $(AULA0903OBJS)\
+						 $(AULA0903OBJS)
+
+AULA10OBJS = $(AULA1001OBJS)\
+						 $(AULA1002OBJS)
 
 AULA0101OBJS = aula0101.o
 AULA0102OBJS = aula0102.o
@@ -226,6 +237,9 @@ AULA0806BOBJS = aula0804.o aula0806b.o
 
 AULA0902OBJS = aula0901.o aula0902.o
 AULA0903OBJS = aula0901.o aula0903.o  
+
+AULA1001OBJS = aula1001.o
+AULA1002OBJS = aula1002.o
 
 LIBS = $(LIBMATEMATICA)\
        $(LIBMATHC)
@@ -386,6 +400,17 @@ aula0902:	$(AULA0902OBJS)
 #Regras para gerar somente um executavel
 aula0903:	$(AULA0903OBJS)	
 	$(LD)	$(LFLAGS)	-o	$@	$(AULA0903OBJS)
+
+#Regra para gerar todos os executaveis da aula 10
+aula10:	$(EXECSAULA10)
+
+#Regras para gerar somente um executavel
+aula1001:	$(AULA1001OBJS)	
+	$(LD)	$(LFLAGS)	-o	$@	$(AULA1001OBJS)
+
+aula1002:	$(AULA1002OBJS)	
+	$(LD)	$(LFLAGS)	-o	$@	$(AULA1002OBJS)	
+
 
 #Objetivos das libs
 $(LIBMATEMATICA):	$(LIBMATEMATICAOBJS)

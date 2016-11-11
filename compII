@@ -1,0 +1,312 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Po",
+				"PONTO_NAS_BORDAS"
+			],
+			[
+				"linh",
+				"linhaCantoInferiorDireito"
+			],
+			[
+				"lin",
+				"linhaPontoDentroPoligono"
+			],
+			[
+				"co",
+				"colunaCantoSuperiorEsquerdo"
+			],
+			[
+				"E",
+				"EXCEDE_LIMITES"
+			],
+			[
+				"tam",
+				"tamanhoColunas"
+			],
+			[
+				"T",
+				"tamanhoLinhas"
+			],
+			[
+				"ma",
+				"maximoColunas"
+			],
+			[
+				"max",
+				"maximoColunas"
+			],
+			[
+				"col",
+				"coluna"
+			],
+			[
+				"P",
+				"PreencherPoligono"
+			],
+			[
+				"c",
+				"coluna"
+			],
+			[
+				"Pono",
+				"PONTO_FORA_DOS_LIMITES"
+			],
+			[
+				"tipo",
+				"tipoErros"
+			],
+			[
+				"l",
+				"linhaCantoInferiorDireito"
+			],
+			[
+				"colu",
+				"colunaCantoSuperiorEsquerdo"
+			],
+			[
+				"lina",
+				"linhaCantoSuperiorEsquerdo"
+			],
+			[
+				"N",
+				"NUMERO_MAXIMO_COLUNAS"
+			],
+			[
+				"NU",
+				"NUMERO_MAXIMO_LINHAS"
+			],
+			[
+				"ta",
+				"tamanhoColunas"
+			],
+			[
+				"da",
+				"dadoErro"
+			],
+			[
+				"m",
+				"maximoColunas"
+			],
+			[
+				"cou",
+				"colunas"
+			],
+			[
+				"maximo",
+				"maximoColunas"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "aula0901.c",
+			"settings":
+			{
+				"buffer_size": 1207,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/felipe/Área de Trabalho/backup_23102016/aula0701.c",
+		"/home/felipe/Área de Trabalho/backup_23102016/testeAula07.sh",
+		"/home/felipe/Área de Trabalho/backup_23102016/Makefile",
+		"/home/felipe/Área de Trabalho/backup_23102016/aula0701.h",
+		"/home/felipe/Área de Trabalho/backup_23102016/aula0702.c"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" linha",
+			"linha",
+			"printf",
+			"colunas",
+			"lnha",
+			"linhas",
+			"aceso"
+		],
+		"highlight": true,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"coluna",
+			"linha",
+			"lnha"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "aula0901.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1207,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								246,
+								246
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

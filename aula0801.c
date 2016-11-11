@@ -6,9 +6,12 @@
 * Prof. Marcelo Luiz Drumond Lanza
 * Autor: Felipe Claudio da Silva Santos
 
-* $Author$
-* $Date$
-* $Log$
+* $Author: felipe.santos $
+* $Date: 2016/10/31 00:13:10 $
+* $Log: aula0801.c,v $
+* Revision 1.1  2016/10/31 00:13:10  felipe.santos
+* Initial revision
+*
 */
 
 #include "aula0801.h"
@@ -47,4 +50,4 @@ ValidarPisPasep (byte numero[])
   return (verdadeiro);
 }
 
-/* $RCSfile$ */
+/* $RCSfile: aula0801.c,v $ */

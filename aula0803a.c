@@ -6,9 +6,12 @@
 * Prof. Marcelo Luiz Drumond Lanza
 * Autor: Felipe Claudio da Silva Santos
 
-* $Author$
-* $Date$
-* $Log$
+* $Author: felipe.santos $
+* $Date: 2016/10/31 00:12:17 $
+* $Log: aula0803a.c,v $
+* Revision 1.1  2016/10/31 00:12:17  felipe.santos
+* Initial revision
+*
 *
 */
 
@@ -62,4 +65,4 @@ main ( int argc, char *argv[] )
 	return (OK);
 } 
 
-/* $RCSfile$ */
+/* $RCSfile: aula0803a.c,v $ */

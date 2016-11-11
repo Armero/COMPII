@@ -6,9 +6,12 @@
 * Prof. Marcelo Luiz Drumond Lanza
 * Autor: Felipe Claudio da Silva Santos
 
-* $Author$
+* $Author: felipe.santos $
 * $Date
-* $Log$
+* $Log: aula0801.h,v $
+* Revision 1.1  2016/10/31 00:09:08  felipe.santos
+* Initial revision
+*
 */
 
 
