@@ -14,10 +14,22 @@ $Log$
 fcssUmlLanguageType
 FcssUmlGetLanguageIndex (char *language)
 {
-	if ( !(strncmp(language, "fcssUmlPortuguese", SIZE_PORTUGUESE_OPTION) ) 
+	if ( !(strncmp(language, "portuguese", SIZE_PORTUGUESE_OPTION) ) ) 
 		return (fcssUmlPortuguese);
 
 	return (fcssUmlEnglish);
+}
+
+fcssUmlErrorType
+FcssUmlGetConfigurationOptionsValues (char * fileName, fcssUmlConfigurationOptionsType *options)
+{
+	FILE *configurationFile;
+
+  
+
+	/*Ler as opcoes do arquivo - nao foi definido ainda como fazer*/
+	/*fclose(configurationFile);*/
+	return (OK);
 }
 
 /* $RCSfile$ */

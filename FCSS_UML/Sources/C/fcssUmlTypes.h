@@ -15,6 +15,12 @@ $Log$
 
 #include "fcssUmlConst.h"
 
+typedef enum name
+{
+	false,
+	true,
+} boolean;
+
 typedef enum 
 {
 	fcssUmlEnglish,
@@ -22,21 +28,43 @@ typedef enum
 	fcssUmlLanguagesAmount,
 } fcssUmlLanguageType;
 
-typedef unsigned char byte;
+typedef unsigned long long fcssUmlUserIdentifierType;
+
+typedef unsigned long long  fcssUmlProfileType;
+
+typedef struct 
+{
+	fcssUmlUserIdentifierType identifier;
+	char 													nickName [NICKNAME_LENGTH + 1];
+	char 													password [PASSWORD_LENGTH + 1];
+	char 													passwordConfirmation [PASSWORD_LENGTH + 1];
+	fcssUmlProfileType 						profileType;
+	char 													fullName [FULL_NAME_LENGTH + 1];
+	char 													fullNameConfirmation [FULL_NAME_LENGTH + 1];
+	char 													email [EMAIL_LENGTH + 1];
+	char 													emailConfirmation [EMAIL_LENGTH + 1];
+	struct 												fcssUmlUserDataType *previous, *next;
+} fcssUmlUserDataType;
 
 typedef struct
 {
-	fcssUmlUserIdentifierType identifier,
-	char nickName [NICKANAME_LENGTH + 1];
-	char password [PASSWORD_LENGTH + 1];
-	char passwordConfirmation [PASSWORD_LENGTH + 1];
-	fcssUmlProfileType profile;
-	char fullName [FULL_NAME_LENGTH + 1];
-	char fullNameConfirmation [FULL_NAME_LENGTH + 1];
-	char email [EMAIL_LENGTH + 1];
-	char emailConfirmation [EMAIL_LENGTH + 1];
-	fccsUmlUserDataType *previous, *next;
-} fcssUmlUserDataType;
+} fcssUmlConfigurationOptionsType;
+
+/*
+ typedef struct option 
+ {
+     const char *name;
+     int         has_arg;
+     int        *flag;
+     int         val;
+ }	fcssLongOptions;
+*/
+
+typedef enum 
+{
+	HELP,
+	ADD_USER,
+} fcssFunctionSelect;
 
 #endif
 

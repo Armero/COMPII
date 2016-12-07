@@ -25,6 +25,12 @@ CFLAGS = -Wall -D_MY_DEBUG_
 LFLAGS = -Wall
 AFLAGS = -l
 
+ALL = $(EXECS)
+EXECS = $(FCSSUMLEXECS)
+OBJS = $(FCSSUMLOBJS)
+
+FCSSUMLEXECS 	= fcssUml
+FCSSUMLOBJS 	= fcssUml.o fcssUmlFunctions.o fcssUmlShowCliHelp.o 
 
 #Regra implicita
 .c.o:
@@ -34,3 +40,8 @@ AFLAGS = -l
 #O $@ chama todos os .o necessarios paraera o executavel correspondentes
 all:	$(ALL)
 
+fcssUml: $(FCSSUMLOBJS)
+	$(LD)	$(LFLAGS)	-o	$@	$(FCSSUMLOBJS)
+
+clean:
+	rm -f $(EXECS) $(OBJS)

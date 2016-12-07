@@ -12,31 +12,31 @@ $Log$
 
 #include "fcssUmlUserInterface.h"
 
-char *fcssUmlCliUserInterfaceMessages [languageAmount][errorCodeAmountCli] = 
+char *fcssUmlCliUserInterfaceMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
 {
 	{
 		"OK",
-	}
+	},
 	{
 		"Sucesso",
 	}
 };
 
-char *fcssUmlNcursesUserInterfaceMessages [languageAmount][errorCodeAmountCli] = 
+char *fcssUmlNcursesUserInterfaceMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
 {
 	{
 		"OK",
-	}
+	},
 	{
 		"Sucesso",
 	}
 };
 
-char *fcssUmlCgiUserInterfaceMessages [languageAmount][errorCodeAmountCli] = 
+char *fcssUmlCgiUserInterfaceMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
 {
 	{
 		"OK",
-	}
+	},
 	{
 		"Sucesso",
 	}
@@ -45,19 +45,19 @@ char *fcssUmlCgiUserInterfaceMessages [languageAmount][errorCodeAmountCli] =
 char *
 fcssUmlGetCliUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
-	return (fcssUmlCliUserInterfaceMessages[(unsigned) language][message]);
+	return (fcssUmlCliUserInterfaceMessages[(unsigned) language][(unsigned) message]);
 }
 
 char *
 fcssUmlGetNcursesUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
-	return (fcssUmlNcursesUserInterfaceMessages[(unsigned) language][message]);
+	return (fcssUmlNcursesUserInterfaceMessages[(unsigned) language][(unsigned)message]);
 }
 
 char *
 fcssUmlGetWebUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
-	return (fcssUmlCgiUserInterfaceMessages[(unsigned) language][message]);
+	return (fcssUmlCgiUserInterfaceMessages[(unsigned) language][(unsigned)message]);
 }
 
 /* $RCSfile$ */

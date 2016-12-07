@@ -13,17 +13,24 @@ $Log$
 #ifndef FCSSUMLERRORS_H
 #define FCSSUMLERRORS_H "@(#)fcssUmlErrors.h $Revisions$"
 
-typedef unsigned char fcssUmlErrorType;
+#include "fcssUmlConst.h"
+#include "fcssUmlTypes.h"
 
+typedef enum
+{
+	OK,
+	CONFIGURATION_FILE_NOT_FOUND,
+	ERROR_AMOUNT,
+} fcssUmlErrorType;
 
 char *
-FcssUmlGetCliErrorMessage (fcssUmlErrortype error, fcssUmlLanguageType language);
+FcssUmlGetCliErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language);
 
 char *
-FcssUmlGetNcursesErrorMessage (fcssUmlErrortype error, fcssUmlLanguageType language);
+FcssUmlGetNcursesErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language);
 
 char *
-FcssUmlGetWebErrorMessage (fcssUmlErrortype error, fcssUmlLanguageType language);
+FcssUmlGetWebErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language);
 
 #endif
 

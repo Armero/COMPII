@@ -10,51 +10,52 @@ $Date$
 $Log$
 */
 #include "fcssUmlErrors.h"
+#include "fcssUmlTypes.h"
 
-char *fcssUmlCliErrorMessages [languageAmount][errorCodeAmountCli] = 
+char *fcssUmlCliErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
 {
 	{
 		"OK",
-	}
+	},
 	{
 		"Sucesso",
 	}
 };
 
-char *fcssUmlNcursesErrorMessages [languageAmount][errorCodeAmountNcurses] = 
+char *fcssUmlNcursesErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
 {
 	{
 		"OK"
-	}
+	},
 	{
 		"Sucesso"
 	}
 };
 
-char *fcssUmlWebErrorMessages [languageAmount][errorCodeAmountCgi] = 
+char *fcssUmlWebErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
 {
 	{
 		"OK"
-	}
+	},
 	{
 		"Sucesso"
 	}
 };
 
 char *
-FcssUmlGetCliErrorMessage (fcssUmlErrortype error, fcssUmlLanguageType language)
+FcssUmlGetCliErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language)
 {
 	return (fcssUmlCliErrorMessages[(unsigned)language][(unsigned)error]);
 }
 
 char *
-FcssUmlGetNcursesErrorMessage (fcssUmlErrortype error, fcssUmlLanguageType language)
+FcssUmlGetNcursesErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language)
 {
 	return (fcssUmlNcursesErrorMessages[(unsigned)language][(unsigned)error]);
 }
 
 char *
-FcssUmlGetWebErrorMessage (fcssUmlErrortype error, fcssUmlLanguageType language)
+FcssUmlGetWebErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language)
 {
 	return (fcssUmlWebErrorMessages[(unsigned)language][(unsigned)error]);
 }
