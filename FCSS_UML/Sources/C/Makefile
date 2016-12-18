@@ -23,14 +23,14 @@ AR = ar
 #AFLAGS = as flags utilazadas pelo compilador de bibliotecas
 CFLAGS = -Wall -D_MY_DEBUG_
 LFLAGS = -Wall
-AFLAGS = -l
+AFLAGS = -lncurses
 
 ALL = $(EXECS)
 EXECS = $(FCSSUMLEXECS)
 OBJS = $(FCSSUMLOBJS)
 
 FCSSUMLEXECS 	= fcssUml
-FCSSUMLOBJS 	= fcssUml.o fcssUmlFunctions.o fcssUmlShowCliHelp.o 
+FCSSUMLOBJS 	= fcssUml.o fcssUmlFunctions.o fcssUmlShowCliHelp.o fcssUmlRunNcursesInterface.o
 
 #Regra implicita
 .c.o:
@@ -41,7 +41,7 @@ FCSSUMLOBJS 	= fcssUml.o fcssUmlFunctions.o fcssUmlShowCliHelp.o
 all:	$(ALL)
 
 fcssUml: $(FCSSUMLOBJS)
-	$(LD)	$(LFLAGS)	-o	$@	$(FCSSUMLOBJS)
+	$(LD)	$(LFLAGS)	-o	$@	$(FCSSUMLOBJS)	$(AFLAGS)
 
 clean:
 	rm -f $(EXECS) $(OBJS)

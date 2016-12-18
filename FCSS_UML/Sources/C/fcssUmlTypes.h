@@ -32,18 +32,18 @@ typedef unsigned long long fcssUmlUserIdentifierType;
 
 typedef unsigned long long  fcssUmlProfileType;
 
-typedef struct 
+typedef struct stuctFcssUmlUserDataType
 {
 	fcssUmlUserIdentifierType identifier;
-	char 													nickName [NICKNAME_LENGTH + 1];
-	char 													password [PASSWORD_LENGTH + 1];
-	char 													passwordConfirmation [PASSWORD_LENGTH + 1];
-	fcssUmlProfileType 						profileType;
-	char 													fullName [FULL_NAME_LENGTH + 1];
-	char 													fullNameConfirmation [FULL_NAME_LENGTH + 1];
-	char 													email [EMAIL_LENGTH + 1];
-	char 													emailConfirmation [EMAIL_LENGTH + 1];
-	struct 												fcssUmlUserDataType *previous, *next;
+	char 																	nickName [FCSS_UML_NICKNAME_LENGTH + 1];
+	char 																	password [FCSS_UML_PASSWORD_LENGTH + 1];
+	char 																	passwordConfirmation [FCSS_UML_PASSWORD_LENGTH + 1];
+	fcssUmlProfileType 										profileType;
+	char 																	fullName [FCSS_UML_FULL_NAME_LENGTH + 1];
+	char 																	fullNameConfirmation [FCSS_UML_FULL_NAME_LENGTH + 1];
+	char 																	email [FCSS_UML_EMAIL_LENGTH + 1];
+	char 																	emailConfirmation [FCSS_UML_EMAIL_LENGTH + 1];
+	struct stuctFcssUmlUserDataType 			*previous, *next;
 } fcssUmlUserDataType;
 
 typedef struct
@@ -63,7 +63,8 @@ typedef struct
 typedef enum 
 {
 	HELP,
-	ADD_USER,
+	NCURSES,
+	ADD_USER
 } fcssFunctionSelect;
 
 #endif

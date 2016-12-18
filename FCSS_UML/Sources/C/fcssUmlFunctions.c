@@ -14,7 +14,7 @@ $Log$
 fcssUmlLanguageType
 FcssUmlGetLanguageIndex (char *language)
 {
-	if ( !(strncmp(language, "portuguese", SIZE_PORTUGUESE_OPTION) ) ) 
+	if ( !(strcmp(language, "portuguese") ) ) 
 		return (fcssUmlPortuguese);
 
 	return (fcssUmlEnglish);
