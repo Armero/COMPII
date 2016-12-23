@@ -34,6 +34,8 @@ $Log$
 #define NCURSES_NUMBER_OF_ROWS											24
 #define NCURSES_NUMBER_OF_COLUMS										60
 
+#define ENTER_KEY_PRESSED														10
+
 #endif
 
 /* $RCSfile$ */

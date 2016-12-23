@@ -129,7 +129,7 @@ main (int argc, char *argv[])
  	{
  		case (HELP):
  			FcssUmlShowCliHelp ( configurationOptions, languageChoice );
- 		break;
+ 		break; 
     case (NCURSES):
       fcssUmlRunNcursesInterface (configurationOptions, "Felipe", languageChoice);
     break;

@@ -28,6 +28,7 @@ typedef enum
 	fcssUmlLanguagesAmount,
 } fcssUmlLanguageType;
 
+
 typedef unsigned long long fcssUmlUserIdentifierType;
 
 typedef unsigned long long  fcssUmlProfileType;
@@ -63,9 +64,17 @@ typedef struct
 typedef enum 
 {
 	HELP,
-	NCURSES,
-	ADD_USER
+	ADD_USER,
+	NCURSES
 } fcssFunctionSelect;
+
+typedef enum 
+{
+	NOTHING_SELECTED_NCURSES = 0,
+	HELP_NCURSES 						 = 1,
+	ADD_USER_NCURSES						,
+	EXIT_NCURSES
+} fcssNcursesMenuOptions;
 
 #endif
 
