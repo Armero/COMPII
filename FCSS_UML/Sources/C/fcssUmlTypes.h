@@ -35,7 +35,7 @@ typedef unsigned long long  fcssUmlProfileType;
 
 typedef struct stuctFcssUmlUserDataType
 {
-	fcssUmlUserIdentifierType identifier;
+	fcssUmlUserIdentifierType 						identifier;
 	char 																	nickName [FCSS_UML_NICKNAME_LENGTH + 1];
 	char 																	password [FCSS_UML_PASSWORD_LENGTH + 1];
 	char 																	passwordConfirmation [FCSS_UML_PASSWORD_LENGTH + 1];
@@ -49,17 +49,12 @@ typedef struct stuctFcssUmlUserDataType
 
 typedef struct
 {
+	char rootDirectory 										[FCSS_UML_DIRECTORY_LENGTH + 1];
+	char dataDirectory 										[FCSS_UML_DIRECTORY_LENGTH + 1];
+	char cookiesDirectory 								[FCSS_UML_DIRECTORY_LENGTH + 1];
+	fcssUmlUserIdentifierType				 			administratorIdentifier;
+	char administratorEmail								[FCSS_UML_EMAIL_LENGTH + 1];
 } fcssUmlConfigurationOptionsType;
-
-/*
- typedef struct option 
- {
-     const char *name;
-     int         has_arg;
-     int        *flag;
-     int         val;
- }	fcssLongOptions;
-*/
 
 typedef enum 
 {
@@ -71,10 +66,19 @@ typedef enum
 typedef enum 
 {
 	NOTHING_SELECTED_NCURSES = 0,
-	HELP_NCURSES 						 = 1,
+	HELP_NCURSES 						 		,
 	ADD_USER_NCURSES						,
 	EXIT_NCURSES
 } fcssNcursesMenuOptions;
+
+typedef enum
+{
+	ROOT_DIRECTORY,
+	DATA_DIRECTORY,
+	COOKIES_DIRECTORY,
+	ADMINISTRATOR_USER,
+	ADMINISTRATOR_EMAIL,
+} fcssUmlConfigurationsName;
 
 #endif
 

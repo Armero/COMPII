@@ -21,7 +21,7 @@ AR = ar
 #CFLAGS = as flags utilizadas pelo compilador
 #LFLAGS = as flags utilazadas pelo linkeditor
 #AFLAGS = as flags utilazadas pelo compilador de bibliotecas
-CFLAGS = -Wall -D_MY_DEBUG_
+CFLAGS = -Wall
 LFLAGS = -Wall
 AFLAGS = -lncurses
 

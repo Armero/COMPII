@@ -29,7 +29,6 @@ main (int argc, char *argv[])
 {
 
 	char optionsShortTypes[FCSS_UML_NUMBER_OF_SHORT_OPTIONS + 1];
-	char filename [FCSS_UML_SIZE_FILENAME + 1];
   char *subopts = NULL;
   char *value = NULL;
   int option, command;
@@ -38,6 +37,7 @@ main (int argc, char *argv[])
   fcssUmlConfigurationOptionsType *configurationOptions;
   fcssUmlLanguageType languageChoice = fcssUmlEnglish;
   boolean endOptions = 0;
+  char fcssUmlConfigurationFileName[FCSS_UML_FILENAME_LENGTH + 1];
 
 
   static struct option longOptions [] =
@@ -65,7 +65,7 @@ main (int argc, char *argv[])
   opterr = 0;
 
   strcpy(optionsShortTypes, FCSS_UML_SHORT_OPTIONS);
-  strcpy(filename, FCSS_UML_CONFIGURATION_FILE);
+  strcpy(fcssUmlConfigurationFileName, FCSS_UML_CONFIGURATION_FILE);
 
 	// if ( (error = FcssUmlGetConfigurationOptionsValues (filename, configurationOptions)) )
 	// {
@@ -73,6 +73,17 @@ main (int argc, char *argv[])
 	// 	exit (error);
 	// }
 
+  configurationOptions = malloc(sizeof(fcssUmlConfigurationOptionsType));
+  if (FcssUmlGetConfigurationOptionsValues (fcssUmlConfigurationFileName, configurationOptions))
+  {
+    /*error*/
+  }
+
+  printf("root dir: %s\n",configurationOptions->rootDirectory);
+  printf("data dir: %s\n",configurationOptions->dataDirectory);
+  printf("cookies dir: %s\n",configurationOptions->cookiesDirectory);
+  printf("adminId dir: %llu\n",configurationOptions->administratorIdentifier);
+  printf("adminEmail dir: %s\n",configurationOptions->administratorEmail);
  	while ((option = getopt_long(argc, argv, optionsShortTypes, longOptions, &command)) != -1 )
  	{
     printf("option: %c\n", option);

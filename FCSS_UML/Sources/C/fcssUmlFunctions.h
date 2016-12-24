@@ -15,6 +15,7 @@ $Log$
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "fcssUmlTypes.h"
 #include "fcssUmlConst.h"
 #include "fcssUmlErrors.h"
@@ -24,7 +25,13 @@ fcssUmlLanguageType
 FcssUmlGetLanguageIndex (char *language);
 
 fcssUmlErrorType
-FcssUmlGetConfigurationOptionsValues (char * fileName, fcssUmlConfigurationOptionsType *options);
+FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOptionsType *options);
+
+boolean
+fcssUmlGetStringOptionFromFile (FILE *configurationFile, char *temporaryString, unsigned index, char *defaultOptions[], int lineLength);
+
+boolean
+fcssUmlGetNumericOptionFromFile (FILE *configurationFile, unsigned *temporaryNumber, unsigned index, char *defaultOptions[], int lineLength);
 
 #endif
 

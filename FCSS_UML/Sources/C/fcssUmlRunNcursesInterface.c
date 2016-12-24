@@ -24,7 +24,7 @@ void fcssUmlDrawMenu  					(WINDOW *menu, int highlight, int n_choices, char *ch
 void fcssUmlDrawTopBar 					(WINDOW *topBar, char menuName[], int numberOfRows);
 void fcssUmlDrawFooter 					(WINDOW *footer, char footerContent[], int numberOfRows, int numberOfColumns);
 void fcssUmlDrawHelp 						(int numberOfColumns, int numberOfRows);
-void fcssUmlCloseInterface		();
+void fcssUmlCloseInterface			();
 /*must normalize this part above*/
 
 fcssUmlErrorType
