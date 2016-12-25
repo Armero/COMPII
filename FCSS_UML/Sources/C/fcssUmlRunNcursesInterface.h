@@ -14,12 +14,17 @@ $Log$
 
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
+#include "fcssUmlFunctions.h"
+#include "fcssUmlShowNcursesHelp.h"
 #include <ncurses.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 
 fcssUmlErrorType
-fcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOptions, 
+FcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOptions, 
  														char *nickName, fcssUmlLanguageType language); 
 
 #endif

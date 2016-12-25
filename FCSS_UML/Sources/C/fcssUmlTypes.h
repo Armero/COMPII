@@ -15,7 +15,7 @@ $Log$
 
 #include "fcssUmlConst.h"
 
-typedef enum name
+typedef enum
 {
 	false,
 	true,
@@ -70,6 +70,13 @@ typedef enum
 	ADD_USER_NCURSES						,
 	EXIT_NCURSES
 } fcssNcursesMenuOptions;
+
+typedef enum
+{
+	OK_INTERFACE,
+	MESSAGE_AMOUNT,
+}
+fcssUmlUserInterfaceMessageNumberType;
 
 typedef enum
 {

@@ -11,52 +11,54 @@ $Log$
 */ 
 #include "fcssUmlRunNcursesInterface.h"
 
-
-#include <stdio.h>
-#include <ncurses.h>
-#include <string.h>
-#include <stdlib.h>
-
-
-/*must normalize this part below */
-void fcssUmlInitializeWindows		(WINDOW **menu, WINDOW **topBar, WINDOW **footer, int heightBar, int widthBar, int numberOfColumns, int numberOfRows, char *choices[]);
-void fcssUmlDrawMenu  					(WINDOW *menu, int highlight, int n_choices, char *choices[]);
-void fcssUmlDrawTopBar 					(WINDOW *topBar, char menuName[], int numberOfRows);
-void fcssUmlDrawFooter 					(WINDOW *footer, char footerContent[], int numberOfRows, int numberOfColumns);
-void fcssUmlDrawHelp 						(int numberOfColumns, int numberOfRows);
-void fcssUmlCloseInterface			();
-/*must normalize this part above*/
-
 fcssUmlErrorType
-fcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOptions, 
+FcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOptions, 
  														char *nickName, fcssUmlLanguageType language)
 {	
 	WINDOW *menu;
 	WINDOW *topBar;
 	WINDOW *footer;
-	int highlight = 1;
+	unsigned highlight = 1;
 	fcssNcursesMenuOptions choiceInterface = NOTHING_SELECTED_NCURSES;
 	int keyboard;
 	int heightBar = 1;
 	int widthBar;
-	char menuName[100];
-	char footerContent[100];
 	int numberOfRows, numberOfColumns;
-	int counter= 0;
 	boolean closeInterface = false;
-	char *choices[] = 
+	char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS] = 
 	{ 
-		"Help",
-		"Add User",
-		"Exit",
+		{
+			"Help",
+			"Add User",
+			"Exit",
+		},
+		{
+			"Ajuda",
+			"Adicionar Usuario",
+			"Sair",
+		}
   };
-	int n_choices = sizeof(choices) / sizeof(char *);
 
+	char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT] = 
+	{ 
+		{
+			"User Management Library",
+			"Use UP ARROW and DOWN ARROW to select an option",
+			"Use Enter to select an option",
+			"Designed by: Felipe Claudio da Silva Santos",
+		},
+		{
+			"Biblioteca de Gerenciamento de Usarios",
+			"Use as setas CIMA/BAIXO para selecionar uma opcao",
+			"Use enter para selecionar uma opcao",
+			"Feito por: Felipe Claudio da Silva Santos",
+		}
+  };
+
+  const unsigned numberOfChoices = FCSS_UML_NCURSES_NUMBER_OF_OPTIONS;
 	numberOfRows = NCURSES_NUMBER_OF_ROWS;
 	numberOfColumns = NCURSES_NUMBER_OF_COLUMS;
 	widthBar = numberOfColumns;
-	strcpy(menuName, "User Management Library"); 
-	strcpy(footerContent, "Designed By: Felipe Claudio da Silva Santos"); 
 
 	initscr();
 	clear();
@@ -64,28 +66,26 @@ fcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOption
 	cbreak();	/* Line buffering disabled. pass on everything */
 	start_color();
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
-	fcssUmlInitializeWindows(&menu, &topBar, &footer, heightBar, widthBar, numberOfColumns, numberOfRows, choices);
+	FcssUmlInitializeNcursesWindows(&menu, &topBar, &footer, heightBar, widthBar, numberOfColumns, numberOfRows);
 
 	keypad(menu, TRUE);
 
 	while(!closeInterface)
 	{	
-		fcssUmlDrawMenu(menu, highlight, n_choices, choices);
-		fcssUmlDrawTopBar (topBar, menuName, numberOfColumns);
-		fcssUmlDrawFooter (footer, footerContent, numberOfColumns, numberOfRows);
+		FcssUmlDrawNcursesMenu		(menu, highlight, numberOfChoices, language, choices);
+		FcssUmlDrawNcursesTopBar 	(topBar, numberOfColumns, language, extraText);
+		FcssUmlDrawNcursesFooter 	(footer, numberOfColumns, numberOfRows, language, extraText);
 		keyboard = wgetch(menu);
-		printf("Counter %d keyboard: %d\n", counter, keyboard);
-		counter++;
 		switch(keyboard)
 		{	
 			case KEY_UP:
 				if(highlight == 1)
-					highlight = n_choices;
+					highlight = numberOfChoices;
 				else
 					--highlight;
 				break;
 			case KEY_DOWN:
-				if(highlight == n_choices)
+				if(highlight == numberOfChoices)
 					highlight = 1;
 				else 
 					++highlight;
@@ -103,7 +103,7 @@ fcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOption
 			{
 				case (HELP_NCURSES):
 					refresh(); /* DO NOT REMOVE THIS REFRESH - it make things work */
-					fcssUmlDrawHelp		(numberOfColumns, numberOfRows);
+					FcssUmlShowNcursesHelp (configurationOptions, language, numberOfRows, numberOfColumns);
 					choiceInterface = NOTHING_SELECTED_NCURSES;
 				break;
 				case (EXIT_NCURSES):
@@ -114,81 +114,8 @@ fcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOption
 			}
 		}
 	}	
-	fcssUmlCloseInterface(numberOfColumns, numberOfRows);
+	FcssUmlCloseNcursesInterface(numberOfColumns, numberOfRows);
 	return (OK);
 }
 
-void fcssUmlInitializeWindows		(WINDOW **menu, WINDOW **topBar, WINDOW **footer, int heightBar, int widthBar, int numberOfColumns, int numberOfRows, char *choices[])
-{
-	*topBar = newwin (heightBar, widthBar - 5, 1, 1);
-	*footer = newwin (heightBar + 4, widthBar - 5, numberOfRows - 6, 1);
-	*menu =   newwin (numberOfRows, numberOfColumns, 0, 0);
-}
-
-void fcssUmlDrawMenu(WINDOW *menu, int highlight, int n_choices, char *choices[])
-{
-	int row, column, index;	
-
-	row = 2;
-	column = 3;
-	box(menu, 0, 0);
-	for(index = 0; index < n_choices; ++index)
-	{	
-		if(highlight == index + 1) /* Highlight the present choice */
-		{	wattron(menu, A_REVERSE); 
-			mvwprintw(menu, column, row, "%s", choices[index]);
-			wattroff(menu, A_REVERSE);
-		}
-		else
-			mvwprintw(menu, column, row, "%s", choices[index]);
-		column++;
-	}
-	wrefresh(menu);
-}
-
-void fcssUmlDrawTopBar (WINDOW *topBar, char menuName[], int numberOfColumns)
-{
-	int centerX = (numberOfColumns/2) - (strlen(menuName)/2);
-
-	wclear(topBar);
-	wbkgd(topBar, COLOR_PAIR(1));
-	mvwprintw(topBar, 0, centerX, "%s", menuName);
-	wrefresh(topBar);
-}
-
-void fcssUmlDrawFooter (WINDOW *footer, char footerContent[], int numberOfColumns, int numberOfRows)
-{
-	int centerX = (numberOfColumns/2) - (strlen(footerContent)/2);
-
-	wclear(footer);
-	wbkgd(footer, COLOR_PAIR(1));
-	mvwprintw(footer, 0, centerX, "Use UP ARROW and DOWN ARROW to move");
-	mvwprintw(footer, 1, centerX, "Use Enter to select option");
-	mvwprintw(footer, 4, centerX, "%s", footerContent);
-	curs_set(0);
-	wrefresh(footer);
-}
-
-void fcssUmlDrawHelp (int numberOfColumns, int numberOfRows)
-{
-	WINDOW *help;
-	int row, column;	
-
-	row = 2;
-	column = 3;
-	help = newwin (numberOfRows, numberOfColumns, 0, 0);
-	wbkgd(help, COLOR_PAIR(1));
-	box(help, 0, 0);
-	mvwprintw(help, row, column, "%s", "This should help");
-	wrefresh(help);
-	getch();
-	delwin(help);
-}
-
-void fcssUmlCloseInterface  ()
-{
-	clrtoeol();
-	refresh();
-	endwin();
-}
 /* $RCSfile$ */

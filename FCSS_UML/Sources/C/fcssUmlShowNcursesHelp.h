@@ -12,8 +12,12 @@ $Log$
 #ifndef FCSSUMLSHOWNCURSESHELP_H
 #define FCSSUMLSHOWNCURSESHELP_H "@(#)fcssUmlShowNcursesHelp.h $Revisions$"
 
+#include "fcssUmlTypes.h"
+#include "fcssUmlErrors.h"
+#include <ncurses.h>
+
 void
-FcssUmlShowNcursesHelp (fcssUmlConfigurationOptionsType *option, fcssUmlLanguageType language);
+FcssUmlShowNcursesHelp (fcssUmlConfigurationOptionsType *option, fcssUmlLanguageType language, int numberOfRows, int numberOfColumns);
 
 #endif
 

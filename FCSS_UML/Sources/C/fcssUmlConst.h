@@ -36,6 +36,10 @@ $Log$
 
 #define ENTER_KEY_PRESSED														10
 
+#define FCSS_UML_TEXT_AMOUNT												1
+#define FCSS_UML_NCURSES_NUMBER_OF_OPTIONS					3
+#define FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT				4
+
 #define EOS 																				'\0'
 
 #endif

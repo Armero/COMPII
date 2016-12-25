@@ -43,19 +43,19 @@ char *fcssUmlCgiUserInterfaceMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] =
 };
 
 char *
-fcssUmlGetCliUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
+FcssUmlGetCliUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
 	return (fcssUmlCliUserInterfaceMessages[(unsigned) language][(unsigned) message]);
 }
 
 char *
-fcssUmlGetNcursesUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
+FcssUmlGetNcursesUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
 	return (fcssUmlNcursesUserInterfaceMessages[(unsigned) language][(unsigned)message]);
 }
 
 char *
-fcssUmlGetWebUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
+FcssUmlGetWebUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
 	return (fcssUmlCgiUserInterfaceMessages[(unsigned) language][(unsigned)message]);
 }

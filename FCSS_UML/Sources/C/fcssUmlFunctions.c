@@ -48,34 +48,32 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 	/*verify length of the strings before copying*/
 	numberOfOptions = (unsigned) sizeof(defaultOptions) / sizeof(char *);
 	index = ROOT_DIRECTORY;
-	printf("%s fileName: %s\n", "aqui-1", fileName);
 	if ( !(configurationFile = fopen(fileName, "r")) )
  	{
  		return (CONFIGURATION_FILE_NOT_FOUND);
  	}
-	printf("%s\n", "aqui0");
 	while (index < numberOfOptions)
 	{
 		switch (index)
 		{
 			case(ROOT_DIRECTORY):
-				if (fcssUmlGetStringOptionFromFile(configurationFile, temporaryDirectory, index, defaultOptions, FCSS_UML_DIRECTORY_LENGTH))
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryDirectory, index, defaultOptions, FCSS_UML_DIRECTORY_LENGTH))
 					strncpy(options->rootDirectory, temporaryDirectory, FCSS_UML_DIRECTORY_LENGTH + 1);
 			break;
 			case(DATA_DIRECTORY):
-				if (fcssUmlGetStringOptionFromFile(configurationFile, temporaryDirectory, index, defaultOptions, FCSS_UML_DIRECTORY_LENGTH))
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryDirectory, index, defaultOptions, FCSS_UML_DIRECTORY_LENGTH))
 					strncpy(options->dataDirectory, temporaryDirectory, FCSS_UML_DIRECTORY_LENGTH + 1);
 			break;
 			case(COOKIES_DIRECTORY):
-				if (fcssUmlGetStringOptionFromFile(configurationFile, temporaryDirectory, index, defaultOptions, FCSS_UML_DIRECTORY_LENGTH))
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryDirectory, index, defaultOptions, FCSS_UML_DIRECTORY_LENGTH))
 					strncpy(options->cookiesDirectory, temporaryDirectory, FCSS_UML_DIRECTORY_LENGTH + 1);
 			break;
 			case(ADMINISTRATOR_USER):
-				if (fcssUmlGetNumericOptionFromFile(configurationFile, &temporaryNumber, index, defaultOptions, FCSS_UML_DEFAULT_LINE_LENGTH))
+				if (FcssUmlGetNumericOptionFromFile(configurationFile, &temporaryNumber, index, defaultOptions, FCSS_UML_DEFAULT_LINE_LENGTH))
 					options->administratorIdentifier = temporaryNumber;
 			break;
 			case(ADMINISTRATOR_EMAIL):
-				if (fcssUmlGetStringOptionFromFile(configurationFile, temporaryEmail, index, defaultOptions, FCSS_UML_EMAIL_LENGTH))
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryEmail, index, defaultOptions, FCSS_UML_EMAIL_LENGTH))
 					strncpy(options->administratorEmail, temporaryDirectory, FCSS_UML_EMAIL_LENGTH + 1);
 			break;
 		}
@@ -87,7 +85,7 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 }
 
 boolean
-fcssUmlGetStringOptionFromFile (FILE *configurationFile, char *temporaryString, unsigned index, char *defaultOptions[], int lineLength)
+FcssUmlGetStringOptionFromFile (FILE *configurationFile, char *temporaryString, unsigned index, char *defaultOptions[], int lineLength)
 {
 	unsigned memberLength = strlen(defaultOptions[index]);
 	unsigned stringIndex = memberLength;
@@ -114,7 +112,7 @@ fcssUmlGetStringOptionFromFile (FILE *configurationFile, char *temporaryString, 
 }
 
 boolean
-fcssUmlGetNumericOptionFromFile (FILE *configurationFile, unsigned *temporaryNumber, unsigned index, char *defaultOptions[], int lineLength)
+FcssUmlGetNumericOptionFromFile (FILE *configurationFile, unsigned *temporaryNumber, unsigned index, char *defaultOptions[], int lineLength)
 {
 	unsigned memberLength = strlen(defaultOptions[index]);
 	unsigned stringIndex = memberLength;
@@ -143,6 +141,69 @@ fcssUmlGetNumericOptionFromFile (FILE *configurationFile, unsigned *temporaryNum
 	return(false);
 }
 
+void 
+FcssUmlInitializeNcursesWindows		(WINDOW **menu, WINDOW **topBar, WINDOW **footer, int heightBar, int widthBar, int numberOfColumns, int numberOfRows)
+{
+	*topBar = newwin (heightBar, widthBar - 5, 1, 1);
+	*footer = newwin (heightBar + 4, widthBar - 5, numberOfRows - 6, 1);
+	*menu =   newwin (numberOfRows, numberOfColumns, 0, 0);
+}
+
+void 
+FcssUmlDrawNcursesMenu(WINDOW *menu, int highlight, int n_choices, fcssUmlLanguageType language, char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS])
+{
+	int row, column, index;	
+
+	row = 2;
+	column = 3;
+	box(menu, 0, 0);
+	for(index = 0; index < n_choices; ++index)
+	{	
+		if(highlight == index + 1) /* Highlight the present choice */
+		{	wattron(menu, A_REVERSE); 
+			mvwprintw(menu, column, row, "%s", choices[language][index]);
+			wattroff(menu, A_REVERSE);
+		}
+		else
+			mvwprintw(menu, column, row, "%s", choices[language][index]);
+		column++;
+	}
+	wrefresh(menu);
+}
+
+void 
+FcssUmlDrawNcursesTopBar (WINDOW *topBar, int numberOfColumns, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT])
+{
+	int centerX = (numberOfColumns/2) - (strlen(extraText[language][0])/2);
+
+	wclear(topBar);
+	wbkgd(topBar, COLOR_PAIR(1));
+	mvwprintw(topBar, 0, centerX, "%s", extraText[language][0]);
+	wrefresh(topBar);
+}
+
+void 
+FcssUmlDrawNcursesFooter (WINDOW *footer, int numberOfColumns, int numberOfRows, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT])
+{
+	int centerX = (numberOfColumns/2) - (strlen(extraText[language][1])/2);
+
+	wclear(footer);
+	wbkgd(footer, COLOR_PAIR(1));
+	mvwprintw(footer, 0, centerX, extraText[language][1]);
+	mvwprintw(footer, 1, centerX, extraText[language][2]);
+	mvwprintw(footer, 4, centerX, "%s", extraText[language][3]);
+	curs_set(0);
+	wrefresh(footer);
+}
+
+void 
+FcssUmlCloseNcursesInterface  ()
+{
+	clrtoeol();
+	refresh();
+	endwin();
+}
 /*FcssUmlGetFileOptions (char *fileName, fcssUmlConfigurationOptionsType *options)*/
 /* $RCSfile$ */
+
 

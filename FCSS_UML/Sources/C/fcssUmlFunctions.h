@@ -13,26 +13,42 @@ $Log$
 #ifndef FCSSUMLFUNCTIONS_H
 #define FCSSUMLFUNCTIONS_H "@(#)fcssUmlFunctions.h $Revisions$"
 
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "fcssUmlTypes.h"
 #include "fcssUmlConst.h"
 #include "fcssUmlErrors.h"
 #include "fcssUmlConfig.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ncurses.h>
+
 
 fcssUmlLanguageType
 FcssUmlGetLanguageIndex (char *language);
 
 fcssUmlErrorType
-FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOptionsType *options);
+FcssUmlGetConfigurationOptionsValues 	(char *fileName, fcssUmlConfigurationOptionsType *options);
 
 boolean
-fcssUmlGetStringOptionFromFile (FILE *configurationFile, char *temporaryString, unsigned index, char *defaultOptions[], int lineLength);
+FcssUmlGetStringOptionFromFile 				(FILE *configurationFile, char *temporaryString, unsigned index, char *defaultOptions[], int lineLength);
 
 boolean
-fcssUmlGetNumericOptionFromFile (FILE *configurationFile, unsigned *temporaryNumber, unsigned index, char *defaultOptions[], int lineLength);
+FcssUmlGetNumericOptionFromFile 			(FILE *configurationFile, unsigned *temporaryNumber, unsigned index, char *defaultOptions[], int lineLength);
 
+void 
+FcssUmlInitializeNcursesWindows							(WINDOW **menu, WINDOW **topBar, WINDOW **footer, int heightBar, int widthBar, int numberOfColumns, int numberOfRows);
+
+void 
+FcssUmlDrawNcursesMenu												(WINDOW *menu, int highlight, int n_choices, fcssUmlLanguageType language, char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS]);
+
+void 
+FcssUmlDrawNcursesTopBar 										(WINDOW *topBar, int numberOfColumns, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT]);
+
+void 
+FcssUmlDrawNcursesFooter 										(WINDOW *footer, int numberOfColumns, int numberOfRows, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT]);
+
+void 
+FcssUmlCloseNcursesInterface			();
 #endif
 
 /* $RCSfile$ */

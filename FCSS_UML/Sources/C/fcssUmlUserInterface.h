@@ -14,21 +14,15 @@ $Log$
 #define FCSSUMLUSERINTERFACE_H "@(#)fcssUmlUserInterface.h $Revisions$"
 #include "fcssUmlErrors.h"
 
-typedef enum
-{
-	OK_INTERFACE,
-	MESSAGE_AMOUNT,
-}
-fcssUmlUserInterfaceMessageNumberType;
 
 char *
-fcssUmlGetCliUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language);
+FcssUmlGetCliUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language);
 
 char *
-fcssUmlGetNcursesUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language);
+FcssUmlGetNcursesUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language);
 
 char *
-fcssUmlGetWebUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language); 
+FcssUmlGetWebUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language); 
 
 #endif
 

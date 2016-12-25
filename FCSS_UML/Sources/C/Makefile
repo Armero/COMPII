@@ -30,7 +30,7 @@ EXECS = $(FCSSUMLEXECS)
 OBJS = $(FCSSUMLOBJS)
 
 FCSSUMLEXECS 	= fcssUml
-FCSSUMLOBJS 	= fcssUml.o fcssUmlFunctions.o fcssUmlShowCliHelp.o fcssUmlRunNcursesInterface.o
+FCSSUMLOBJS 	= fcssUml.o fcssUmlFunctions.o fcssUmlShowCliHelp.o fcssUmlRunNcursesInterface.o fcssUmlShowNcursesHelp.o
 
 #Regra implicita
 .c.o:

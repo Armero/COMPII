@@ -10,7 +10,6 @@ $Date$
 $Log$
 */
 #include "fcssUmlErrors.h"
-#include "fcssUmlTypes.h"
 
 char *fcssUmlCliErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
 {

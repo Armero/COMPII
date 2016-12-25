@@ -11,17 +11,18 @@ $Log$
 */ 
 
 #define _XOPEN_SOURCE 500
+#include "fcssUmlTypes.h"
+#include "fcssUmlErrors.h"
+#include "fcssUmlShowCliHelp.h"
+#include "fcssUmlFunctions.h"
+#include "fcssUmlRunNcursesInterface.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
 #include <getopt.h>
 #include <string.h>
-#include "fcssUmlErrors.h"
-#include "fcssUmlTypes.h"
-#include "fcssUmlShowCliHelp.h"
-#include "fcssUmlFunctions.h"
-#include "fcssUmlRunNcursesInterface.h"
+
 
 
 int
@@ -52,7 +53,6 @@ main (int argc, char *argv[])
 
   enum fcssSubOpts{
     LANGUAGE = 0,
-    NCURSES  = 1,
     THE_END
   };
 
@@ -82,7 +82,7 @@ main (int argc, char *argv[])
   printf("root dir: %s\n",configurationOptions->rootDirectory);
   printf("data dir: %s\n",configurationOptions->dataDirectory);
   printf("cookies dir: %s\n",configurationOptions->cookiesDirectory);
-  printf("adminId dir: %llu\n",configurationOptions->administratorIdentifier);
+  printf("admin id dir: %llu\n",configurationOptions->administratorIdentifier);
   printf("adminEmail dir: %s\n",configurationOptions->administratorEmail);
  	while ((option = getopt_long(argc, argv, optionsShortTypes, longOptions, &command)) != -1 )
  	{
@@ -115,7 +115,7 @@ main (int argc, char *argv[])
       break;
       case 'N':
         selection = NCURSES;
-        subopts = optarg;
+        subopts = argv[optind];
         printf("subopts: %s\n", subopts);
         if (subopts)
         while ((*subopts != '\0') && (!endOptions))
@@ -142,7 +142,7 @@ main (int argc, char *argv[])
  			FcssUmlShowCliHelp ( configurationOptions, languageChoice );
  		break; 
     case (NCURSES):
-      fcssUmlRunNcursesInterface (configurationOptions, "Felipe", languageChoice);
+      FcssUmlRunNcursesInterface (configurationOptions, "Felipe", languageChoice);
     break;
     default:
     break;
