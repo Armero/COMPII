@@ -31,6 +31,16 @@ OBJS = $(FCSSUMLOBJS)
 
 FCSSUMLEXECS 	= fcssUml
 FCSSUMLOBJS 	= fcssUml.o fcssUmlFunctions.o fcssUmlShowCliHelp.o fcssUmlRunNcursesInterface.o fcssUmlShowNcursesHelp.o
+FCSSUMLCGIOBJS = fcssUmlCgiMain.o
+
+EXTERNLIBS = ./Libraries/$(LIBMLCGI)
+LIBMLCGI = libmlcgi.a
+LIBMLCGICENTOS = libmlcgi.a.CentOS.5.x
+LIBMLCGIFREEBSD = libmlcgi.a.FreeBSD.7.x
+
+EXECMAINCGI = fcssUmlCgiMain.cgi
+
+LIBSDIR = ./Libraries/
 
 #Regra implicita
 .c.o:
@@ -43,5 +53,17 @@ all:	$(ALL)
 fcssUml: $(FCSSUMLOBJS)
 	$(LD)	$(LFLAGS)	-o	$@	$(FCSSUMLOBJS)	$(AFLAGS)
 
+fcssUmlCgiMainCentOS: $(FCSSUMLCGIOBJS) mlcgiCentOS
+	$(LD)	$(LFLAGS)	-o 	$(EXECMAINCGI)	$(FCSSUMLCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(EXECMAINCGI) ~/public/html/;
+
+mlcgiCentOS:
+	cd 	$(LIBSDIR);	ln 	-s 	$(LIBMLCGICENTOS)	$(LIBMLCGI);	cd 	..;
+
+fcssUmlCgiMainFreeBSD: $(FCSSUMLCGIOBJS) mlcgiFreeBSD
+	$(LD)	$(LFLAGS)	-o 	$(EXECMAINCGI)	$(FCSSUMLCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(EXECMAINCGI) ~/public/html/;
+
+mlcgiFreeBSD:
+	cd 	$(LIBSDIR);	ln 	-s 	$(LIBMLCGIFREEBSD)	$(LIBMLCGI);	cd 	..;
+
 clean:
-	rm -f $(EXECS) $(OBJS)
+	rm -f $(EXECS) $(OBJS) $(EXTERNLIBS)
