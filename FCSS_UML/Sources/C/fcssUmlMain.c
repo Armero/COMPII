@@ -84,39 +84,14 @@ main (int argc, char *argv[])
                                                                                     cgiText[language][4] );
   printf("  </div>\n");
   printf("  <div align=\"center\">\n");
-  printf("    <form action=\"fcssUmlLogin.cgi\" method=\"post\"> \n");
-  printf("      <table border=1 style=\"width:30%%\">\n");
-  printf("        <tr>\n");
-  printf("          <td>\n");
-  printf("            %s\n", cgiText[language][5]);
-  printf("          </td>\n");
-  printf("          <td align=\"center\">\n");
-  printf("            <input type=\"text\" name=\"username\" maxlength=256 size=20> <br>\n");
-  printf("          </td>\n");
-  printf("        </tr>\n");
-  printf("        <tr>\n");
-  printf("          <td>\n");
-  printf("            %s\n", cgiText[language][6]);
-  printf("          </td>\n");
-  printf("          <td align=\"center\">\n");
-  printf("            <input type=\"password\" name=\"userPassword\" maxlength=127 size=20> <br>\n");
-  printf("          </td>\n");
-  printf("        </tr>\n");
-  printf("        <tr>\n");
-  printf("          <input type=\"hidden\"  name=\"htmlConfigurationFileName\">\n");
-  printf("        </tr>\n");
-  printf("        <tr>\n");
-  printf("          <input type=\"hidden\" name=\"htmlLanguage\">\n");
-  printf("        </tr>\n");
-  printf("      </table>\n");
-  printf("      <table border=1 style=\"width:30%%\">\n");
-  printf("        <tr>\n");
-  printf("          <td align=\"center\">\n");
-  printf("            <input type=\"submit\" value=\"%s\"> <br>\n", cgiText[language][7]);
-  printf("          </td>\n");
-  printf("        </tr>\n");
-  printf("      </table>\n");
-  printf("    </form>\n");
+  printf("    <a href='fcssUmlCgiMain.cgi?configurationFile=%s&language=%s'>%s</a><br>\n",
+                                                                                    stringConfigurationFileName,
+                                                                                    "english",
+                                                                                    cgiText[language][17] );
+  printf("    <a href='fcssUmlCgiMain.cgi?configurationFile=%s&language=%s'>%s</a>\n",
+                                                                                    stringConfigurationFileName,
+                                                                                    "portuguese",
+                                                                                    cgiText[language][18] );
   printf("  </div>\n");
   printf("  <div align=\"center\" bgcolor=\"gray\">\n");
   printf("    <br>%s<br>\n", cgiText[language][9]);

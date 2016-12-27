@@ -203,6 +203,41 @@ FcssUmlCloseNcursesInterface  ()
 	refresh();
 	endwin();
 }
+
+char *cgiText[fcssUmlLanguagesAmount][FCSS_UML_CGI_MAIN_TEXTS] =
+{
+  {
+    "Change Language",
+    "Sign In",
+    "Reset Password",
+    "Help",
+    "License",
+    "Username",
+    "Password",
+    "Designed by: Felipe Claudio da Silva Santos",
+    "Email: felipesantos956ATpoli.ufrj.br",
+    "Send"
+    "Uml - Initial Page",
+    "Full Name",
+    "Full Name Confirmation",
+    "Email"
+    "Email Confirmation"
+  },
+  {
+    "Mudar Linguagem",
+    "Cadastrar",
+    "Resetar Senha",
+    "Ajuda",
+    "Licen&ccedila",
+    "Nome do Usuario",
+    "Senha",
+    "Enviar",
+    "Pagina Inicial - BGU"
+    "Feito por: Felipe Claudio da Silva Santos",
+    "Email: felipesantos956ARROBApoli.ufrj.br",
+    "P&aacutegina Inicial",
+  }
+};
 /*FcssUmlGetFileOptions (char *fileName, fcssUmlConfigurationOptionsType *options)*/
 /* $RCSfile$ */
 

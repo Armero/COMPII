@@ -22,7 +22,6 @@ $Log$
 #include <stdlib.h>
 #include <ncurses.h>
 
-
 fcssUmlLanguageType
 FcssUmlGetLanguageIndex (char *language);
 
@@ -49,6 +48,7 @@ FcssUmlDrawNcursesFooter 										(WINDOW *footer, int numberOfColumns, int num
 
 void 
 FcssUmlCloseNcursesInterface			();
+
 #endif
 
 /* $RCSfile$ */

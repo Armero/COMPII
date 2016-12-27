@@ -15,8 +15,8 @@
 #include "fcssUmlConst.h"
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
-#include "Libraries/mlcgi.h"
 #include "fcssUmlCgiTexts.h"
+#include "Libraries/mlcgi.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -65,41 +65,45 @@ main (int argc, char *argv[])
   printf("</head>\n");
   printf("<body>\n");
   printf("  <div align=\"center\">\n");
-  printf("    <a href='fcssUmlMain.cgi?configurationFile=%s&language=%s'>%s</a>\n",
-                                                                                    stringConfigurationFileName,
-                                                                                    stringLanguage,
-                                                                                    cgiText[language][0] );
-  printf("    <a href='fcssUmlShowRequestRegistrationForm.cgi?configurationFile=%s&language=%s'>%s</a>\n",
-                                                                                    stringConfigurationFileName,
-                                                                                    stringLanguage,
-                                                                                    cgiText[language][1] );
+  printf("    <a href=\"#changeLanguage\">%s</a> \n", cgiText[language][0]);
+  printf("    <a href=\"fcssUmlCgiShowRequestRegistrationForm.cgi\">%s</a>\n", cgiText[language][1]);
   printf("    <a href=\"resetPassword\">%s</a>\n", cgiText[language][2]);
-  printf("    <a href='fcssUmlShowWebHelp.cgi?configurationFile=%s&language=%s'>%s</a>\n",
-                                                                                    stringConfigurationFileName,
-                                                                                    stringLanguage,
-                                                                                    cgiText[language][3] );
-  printf("    <a href='fcssUmlShowLicense.cgi?configurationFile=%s&language=%s'>%s</a>\n",
-                                                                                    stringConfigurationFileName,
-                                                                                    stringLanguage,
-                                                                                    cgiText[language][4] );
+  printf("    <a href=\"help\">%s</a>\n", cgiText[language][3]);
+  printf("    <a href=\"license\">%s</a><br><br>\n", cgiText[language][4]);
   printf("  </div>\n");
   printf("  <div align=\"center\">\n");
-  printf("    <form action=\"fcssUmlLogin.cgi\" method=\"post\"> \n");
+  printf("    <form action=\"userInput.cgi\" method=\"post\"> \n");
   printf("      <table border=1 style=\"width:30%%\">\n");
   printf("        <tr>\n");
   printf("          <td>\n");
-  printf("            %s\n", cgiText[language][5]);
+  printf("            %s\n", cgiText[language][11]);
   printf("          </td>\n");
   printf("          <td align=\"center\">\n");
-  printf("            <input type=\"text\" name=\"username\" maxlength=256 size=20> <br>\n");
+  printf("            <input type=\"text\" name=\"fullName\" maxlength=256 size=20> <br>\n");
   printf("          </td>\n");
   printf("        </tr>\n");
   printf("        <tr>\n");
   printf("          <td>\n");
-  printf("            %s\n", cgiText[language][6]);
+  printf("            %s\n", cgiText[language][12]);
   printf("          </td>\n");
   printf("          <td align=\"center\">\n");
-  printf("            <input type=\"password\" name=\"userPassword\" maxlength=127 size=20> <br>\n");
+  printf("            <input type=\"text\" name=\"fullNameConfirmation\" maxlength=256 size=20> <br>\n");
+  printf("          </td>\n");
+  printf("        </tr>\n");
+  printf("        <tr>\n");
+  printf("          <td>\n");
+  printf("            %s\n", cgiText[language][13]);
+  printf("          </td>\n");
+  printf("          <td align=\"center\">\n");
+  printf("            <input type=\"text\" name=\"email\" maxlength=1024 size=20> <br>\n");
+  printf("          </td>\n");
+  printf("        </tr>\n");
+  printf("        <tr>\n");
+  printf("          <td>\n");
+  printf("            %s\n", cgiText[language][14]);
+  printf("          </td>\n");
+  printf("          <td align=\"center\">\n");
+  printf("            <input type=\"text\" name=\"emailConfirmation\" maxlength=1024 size=20> <br>\n");
   printf("          </td>\n");
   printf("        </tr>\n");
   printf("        <tr>\n");
@@ -119,8 +123,8 @@ main (int argc, char *argv[])
   printf("    </form>\n");
   printf("  </div>\n");
   printf("  <div align=\"center\" bgcolor=\"gray\">\n");
-  printf("    <br>%s<br>\n", cgiText[language][9]);
-  printf("    %s<br>\n", cgiText[language][10]);
+  printf("    <br>%s<br>\n", cgiText[language][7]);
+  printf("    %s<br>\n", cgiText[language][8]);
   printf("  </div>\n");
   printf("</body>\n");
   printf("</html>\n");
