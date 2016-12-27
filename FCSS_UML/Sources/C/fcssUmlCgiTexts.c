@@ -35,7 +35,8 @@ char *cgiText[fcssUmlLanguagesAmount][FCSS_UML_CGI_MAIN_TEXTS] =
     "Generic help text",
     "License text",
     "English",
-    "Portuguese"
+    "Portuguese",
+    "Main Page"
   },
   {
     "Mudar Linguagem",
@@ -46,7 +47,7 @@ char *cgiText[fcssUmlLanguagesAmount][FCSS_UML_CGI_MAIN_TEXTS] =
     "Nome do Usuario",
     "Senha",
     "Enviar",
-    "Pagina Inicial - BGU",
+    "P&aacutegina Inicial - BGU",
     "Feito por: Felipe Claudio da Silva Santos",
     "Email: felipesantos956ARROBApoli.ufrj.br",
     "Nome Completo",
@@ -56,7 +57,8 @@ char *cgiText[fcssUmlLanguagesAmount][FCSS_UML_CGI_MAIN_TEXTS] =
     "Texto gen&eacuterico de ajuda",
     "Texto da Licen&ccedila",
     "Ingl&ecircs",
-    "Portugu&ecircs"
+    "Portugu&ecircs",
+    "P&aacutegina Principal"
   }
 };
 

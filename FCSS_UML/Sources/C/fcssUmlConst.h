@@ -41,7 +41,7 @@ $Log$
 #define FCSS_UML_NCURSES_NUMBER_OF_OPTIONS					3
 #define FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT				4
 
-#define FCSS_UML_CGI_MAIN_TEXTS											19
+#define FCSS_UML_CGI_MAIN_TEXTS											20
 
 #define EOS 																				'\0'
 

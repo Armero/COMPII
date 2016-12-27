@@ -65,30 +65,34 @@ main (int argc, char *argv[])
   printf("</head>\n");
   printf("<body>\n");
   printf("  <div align=\"center\">\n");
-  printf("    <a href='fcssUmlMain.cgi?configurationFile=%s&language=%s'>%s</a>\n",
+  printf("    <a href=\"./fcssUmlCgiMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
+                                                                                  stringConfigurationFileName,
+                                                                                  stringLanguage,
+                                                                                  cgiText[language][19] );
+  printf("    <a href=\"./fcssUmlMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
                                                                                     cgiText[language][0] );
-  printf("    <a href='fcssUmlShowRequestRegistrationForm.cgi?configurationFile=%s&language=%s'>%s</a>\n",
+  printf("    <a href=\"./fcssUmlShowRequestRegistrationForm.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
                                                                                     cgiText[language][1] );
   printf("    <a href=\"resetPassword\">%s</a>\n", cgiText[language][2]);
-  printf("    <a href='fcssUmlShowWebHelp.cgi?configurationFile=%s&language=%s'>%s</a>\n",
+  printf("    <a href=\"./fcssUmlShowWebHelp.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
                                                                                     cgiText[language][3] );
-  printf("    <a href='fcssUmlShowLicense.cgi?configurationFile=%s&language=%s'>%s</a>\n",
+  printf("    <a href=\"./fcssUmlShowLicense.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
                                                                                     cgiText[language][4] );
   printf("  </div>\n");
   printf("  <div align=\"center\">\n");
-  printf("    <a href='fcssUmlCgiMain.cgi?configurationFile=%s&language=%s'>%s</a><br>\n",
+  printf("    <a href=\"./fcssUmlCgiMain.cgi?configurationFile=%s&language=%s\">%s</a><br>\n",
                                                                                     stringConfigurationFileName,
                                                                                     "english",
                                                                                     cgiText[language][17] );
-  printf("    <a href='fcssUmlCgiMain.cgi?configurationFile=%s&language=%s'>%s</a>\n",
+  printf("    <a href=\"./fcssUmlCgiMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     "portuguese",
                                                                                     cgiText[language][18] );

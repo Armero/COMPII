@@ -34,6 +34,19 @@ $Log$
 	#define FCSS_UML_ADMINISTRATOR_EMAIL						"felipeclsantos956@gmail.com"
 	#endif
 
+	#ifndef FCSS_UML_PRIVATE_ROOT_DIRECTORY
+	#define FCSS_UML_PRIVATE_ROOT_DIRECTORY					"/users/felipe.santos/private/EEL270/2016-2/FCSS_UML/"
+	#endif
+
+	#ifndef FCSS_UML_DATA_DIRECTORY
+	#define FCSS_UML_DATA_DIRECTORY									"/users/felipe.santos/private/EEL270/2016-2/FCSS_UML/Data"
+	#endif
+
+	#ifndef FCSS_UML_COOKIES_DIRECTORY
+	#define FCSS_UML_COOKIES_DIRECTORY							"/users/felipe.santos/private/EEL270/2016-2/FCSS_UML/Data/Cookies"
+	#endif
+  
+
 /*	#ifndef FCSS_UML_WEB_SERVER_URL
 	#define FCSS_UML_WEB_SERVER_URL 								"http://www02.del.ufrj.br/~username/FCSS_UML" 
 	#endif

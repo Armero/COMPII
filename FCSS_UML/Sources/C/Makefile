@@ -31,7 +31,12 @@ FCSSUMLEXECS = $(FCSSUMLEXECS)
 FCSSUMLOBJS = $(FCSSUMLCLINCURSESOBJS) $(FCSSUMLCGIOBJS)
 
 FCSSUMLEXECS 	= fcssUml
-FCSSUMLEXECSCGI = $(EXECMAINCGI) $(EXECFORMCGI)
+FCSSUMLEXECSCGI = $(EXECMAINCGI)\
+								 	$(FCSSUMLEXECLANGUAGECGI)\
+								 	$(EXECFORMCGI)\
+								 	$(FCSSUMLEXECHELPCGI)\
+								 	$(FCSSUMLEXECLICESNSECGI)
+
 FCSSUMLEXECMAINCGI = fcssUmlCgiMain.cgi
 FCSSUMLEXECLANGUAGECGI = fcssUmlMain.cgi
 FCSSUMLEXECFORMCGI = fcssUmlShowRequestRegistrationForm.cgi
@@ -78,6 +83,23 @@ LIBMLCGIFREEBSD = libmlcgi.a.FreeBSD.7.x
 
 FCSSUMLLIBSDIR = ./Libraries/
 
+COMPILATIONDIR = /users/felipe.santos/private/EEL270/2016-2/FCSS_UML/Sources/C/
+PUBLICHTMLDIR = /users/felipe.santos/public/html/EEL270/2016-2/FCSS_UML/
+PUBLICCGIDIR = /users/felipe.santos/public/html/EEL270/2016-2/FCSS_UML/CGIs/
+
+CREATEDIRS = mkdir ../../Binaries/;\
+						 mkdir ../../Data/;\
+						 mkdir ../../Cookies/;\
+						 mkdir -p $(PUBLICCGIDIR);
+
+REMOVEDIRS = rm -r ../../Binaries/;\
+						 rm -r ../../Data/;\
+						 rm -r ../../Cookies/;\
+						 rm -r $(PUBLICHTMLDIR);\
+
+COPYFILESUML = cp -r ../HTML/ $(PUBLICHTMLDIR)
+
+
 #Regra implicita
 .c.o:
 	$(CC)	$(CFLAGS)	-c	$<
@@ -86,8 +108,25 @@ FCSSUMLLIBSDIR = ./Libraries/
 #O $@ chama todos os .o necessarios paraera o executavel correspondentes
 all:	$(ALL)
 
-fcssUml: $(FCSSUMLOBJS)
-	$(LD)	$(LFLAGS)	-o	$@	$(FCSSUMLOBJS)	$(AFLAGS)
+install_CentOS: directoryCreation buildAllFilesCentOS copyFiles linkHtmlIndex
+
+install_FreeBSD: directoryCreation buildAllFilesFreeBSD copyFiles linkHtmlIndex
+
+directoryCreation:
+	$(CREATEDIRS)
+
+buildAllFilesCentOS: fcssUml fcssUmlCgiCentOS
+
+buildAllFilesFreeBSD: fcssUml fcssUmlCgiFreeBSD
+
+copyFiles:
+	$(COPYFILESUML)
+
+linkHtmlIndex:
+	cd $(PUBLICHTMLDIR); ln 	-s 	index_en-us.html 	index.html; cd $(COMPILATIONDIR)
+
+fcssUml: $(FCSSUMLCLINCURSESOBJS)
+	$(LD)	$(LFLAGS)	-o	$@	$(FCSSUMLCLINCURSESOBJS)	$(AFLAGS)
 
 fcssUmlCliNcurses: $(FCSSUMLCLINCURSESOBJS)
 	$(LD)	$(LFLAGS)	-o	$(FCSSUMLEXECS)	$(FCSSUMLCLINCURSESOBJS)	$(AFLAGS)
@@ -97,25 +136,28 @@ fcssUmlCgiCentOS:	mlcgiCentOS $(CGITARGETS);
 fcssUmlCgiFreeBSD: mlcgiFreeBSD $(CGITARGETS);
 
 fcssUmlCgiMain: $(FCSSUMLCGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECMAINCGI)	$(FCSSUMLMAINCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECMAINCGI) ~/public/html/;
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECMAINCGI)	$(FCSSUMLMAINCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECMAINCGI) $(PUBLICCGIDIR);
 
 fcssUmlCgiLanguage: $(FCSSUMLLANGUAGECGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECLANGUAGECGI)	$(FCSSUMLLANGUAGECGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECLANGUAGECGI) ~/public/html/;
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECLANGUAGECGI)	$(FCSSUMLLANGUAGECGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECLANGUAGECGI) $(PUBLICCGIDIR);
 
 fcssUmlCgiForm: $(FCSSUMLFORMCGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECFORMCGI)	$(FCSSUMLFORMCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECFORMCGI) ~/public/html/;
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECFORMCGI)	$(FCSSUMLFORMCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECFORMCGI) $(PUBLICCGIDIR);
 
 fcssUmlCgiHelp: $(FCSSUMLHELPCGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECHELPCGI)	$(FCSSUMLHELPCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECHELPCGI) ~/public/html/;	
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECHELPCGI)	$(FCSSUMLHELPCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECHELPCGI) $(PUBLICCGIDIR);	
 
 fcssUmlCgiLicense: $(FCSSUMLLICENSECGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECLICESNSECGI)	$(FCSSUMLLICENSECGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECLICESNSECGI) ~/public/html/;	
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECLICESNSECGI)	$(FCSSUMLLICENSECGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECLICESNSECGI) $(PUBLICCGIDIR);	
 
 mlcgiCentOS:
 	cd 	$(LIBSDIR);	ln 	-s 	$(LIBMLCGICENTOS)	$(LIBMLCGI);	cd 	..;
 
 mlcgiFreeBSD:
 	cd 	$(FCSSUMLLIBSDIR);	ln 	-s 	$(LIBMLCGIFREEBSD)	$(LIBMLCGI);	cd 	..;
+
+removeAll: clean
+	$(REMOVEDIRS) clear;
 
 clean:
 	rm -f $(FCSSUMLEXECS) $(FCSSUMLOBJS) $(FCSSUMLEXTERNLIBS)
