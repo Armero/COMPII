@@ -50,7 +50,7 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 	index = ROOT_DIRECTORY;
 	if ( !(configurationFile = fopen(fileName, "r")) )
  	{
- 		return (CONFIGURATION_FILE_NOT_FOUND);
+ 		return (FCSS_UML_CONFIGURATION_FILE_NOT_FOUND);
  	}
 	while (index < numberOfOptions)
 	{
@@ -81,7 +81,7 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 	}
 
 	fclose(configurationFile);
-	return (OK);
+	return (FCSS_UML_OK);
 }
 
 boolean
@@ -204,41 +204,178 @@ FcssUmlCloseNcursesInterface  ()
 	endwin();
 }
 
-char *cgiText[fcssUmlLanguagesAmount][FCSS_UML_CGI_MAIN_TEXTS] =
+void
+FcssUmlGetAbsolutFileName (char *string1, char *string2, char *outputString)
 {
-  {
-    "Change Language",
-    "Sign In",
-    "Reset Password",
-    "Help",
-    "License",
-    "Username",
-    "Password",
-    "Designed by: Felipe Claudio da Silva Santos",
-    "Email: felipesantos956ATpoli.ufrj.br",
-    "Send"
-    "Uml - Initial Page",
-    "Full Name",
-    "Full Name Confirmation",
-    "Email"
-    "Email Confirmation"
-  },
-  {
-    "Mudar Linguagem",
-    "Cadastrar",
-    "Resetar Senha",
-    "Ajuda",
-    "Licen&ccedila",
-    "Nome do Usuario",
-    "Senha",
-    "Enviar",
-    "Pagina Inicial - BGU"
-    "Feito por: Felipe Claudio da Silva Santos",
-    "Email: felipesantos956ARROBApoli.ufrj.br",
-    "P&aacutegina Inicial",
-  }
-};
-/*FcssUmlGetFileOptions (char *fileName, fcssUmlConfigurationOptionsType *options)*/
+	snprintf(outputString, 50, "%s%s", string1, string2);
+}
+
+fcssUmlErrorType
+FcssUmlCheckStringField (char *stringInput, char *validChars, size_t minimumLength, size_t maximumLegth)
+{
+	unsigned index, auxIndex;
+	unsigned stringLength = strlen(stringInput);
+	boolean isValidChar = false;
+	boolean isValidString = true;
+
+	if ((!stringInput) || (!validChars))
+	{
+		//return (2);
+	}
+	if ( (stringLength < minimumLength) || (stringLength > maximumLegth) )
+	{
+		//return (1);
+	}
+
+	index = 0;
+	while (stringInput[index])
+	{
+		auxIndex = 0;
+		isValidChar = false;
+		while (validChars[auxIndex])
+		{
+			if (stringInput[index] == validChars[auxIndex])
+			{
+				isValidChar = true;
+			}
+			auxIndex++;
+			if ( (!validChars[auxIndex]) && (!isValidChar))
+				isValidString = false;
+		}
+		index++;
+	}
+	if (!isValidString)
+		//return(3);
+
+	return (0);
+}
+
+fcssUmlErrorType
+FcssUmlCheckNickname (char *stringInput, char *validChars, size_t minimumLength, size_t maximumLegth)
+{
+	unsigned index, auxIndex;
+	unsigned stringLength = strlen(stringInput);
+	unsigned specialCharCounter = 0;
+	boolean isValidChar = false;
+	boolean isValidString = true;
+
+	if ((!stringInput) || (!validChars))
+	{
+		//return (2);
+	}
+	if ( (stringLength < minimumLength) || (stringLength > maximumLegth) )
+	{
+		//return (1);
+	}
+
+	index = 0;
+	while (stringInput[index])
+	{
+		auxIndex = 0;
+		isValidChar = false;
+		while (validChars[auxIndex])
+		{
+			if (stringInput[index] == validChars[auxIndex])
+			{
+				isValidChar = true;
+			}
+			auxIndex++;
+			if ( (!validChars[auxIndex]) && (!isValidChar))
+				isValidString = false;
+		}
+		if (stringInput[index] == '.')
+		{
+			isValidChar = true;
+			isValidString = true;
+			specialCharCounter++;
+		}
+		index++;
+	}
+	if (!isValidString)
+		//return(3);
+
+	printf("cont: %d\n", specialCharCounter );
+	if (specialCharCounter != 1)
+	{
+		//return(4);
+	}
+
+	return (FCSS_UML_OK);
+} 
+
+fcssUmlErrorType
+FcssumlCheckEmail (char *stringInput, char *validChars, size_t minimumLength, size_t maximumLegth)
+{
+	unsigned index, auxIndex;
+	unsigned stringLength = strlen(stringInput);
+	unsigned specialCharCounter = 0;
+	boolean isValidChar = false;
+	boolean isValidString = true;
+
+	if ((!stringInput) || (!validChars))
+	{
+		//return (2);
+	}
+	if ( (stringLength < minimumLength) || (stringLength > maximumLegth) )
+	{
+		//return (1);
+	}
+
+	index = 0;
+	while (stringInput[index])
+	{
+		auxIndex = 0;
+		isValidChar = false;
+		while (validChars[auxIndex])
+		{
+			if (stringInput[index] == validChars[auxIndex])
+			{
+				isValidChar = true;
+			}
+			auxIndex++;
+			if ( (!validChars[auxIndex]) && (!isValidChar))
+				isValidString = false;
+		}
+		if (stringInput[index] == '@')
+		{
+			isValidChar = true;
+			isValidString = true;
+			specialCharCounter++;
+		}
+		index++;
+	}
+	if (!isValidString)
+		//return(3);
+
+	printf("cont: %d\n", specialCharCounter );
+	if (specialCharCounter != 1)
+	{
+		//return(4);
+	}
+
+	return (FCSS_UML_OK);
+} 
+
+fcssUmlErrorType
+FcssUmlCreateRandomString (char *validChars, size_t length, char *outputString)
+{	
+	unsigned stringLength = strlen(validChars);
+	unsigned index = 0;
+
+	if (!validChars)
+	{
+		//return(1);
+	}
+	srand(time(NULL));
+	while (index < length)
+	{
+		outputString[index] = validChars[(unsigned) rand() % stringLength];
+		index++;
+	}
+	outputString[index] = EOS;
+
+	return (0);
+}
 /* $RCSfile$ */
 
 

@@ -11,7 +11,7 @@ $Log$
 */
 #include "fcssUmlErrors.h"
 
-char *fcssUmlCliErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
+char *fcssUmlCliErrorMessages [fcssUmlLanguagesAmount][FCSS_UML_ERROR_AMOUNT] = 
 {
 	{
 		"OK",
@@ -21,7 +21,7 @@ char *fcssUmlCliErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] =
 	}
 };
 
-char *fcssUmlNcursesErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
+char *fcssUmlNcursesErrorMessages [fcssUmlLanguagesAmount][FCSS_UML_ERROR_AMOUNT] = 
 {
 	{
 		"OK"
@@ -31,7 +31,7 @@ char *fcssUmlNcursesErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] =
 	}
 };
 
-char *fcssUmlWebErrorMessages [fcssUmlLanguagesAmount][ERROR_AMOUNT] = 
+char *fcssUmlWebErrorMessages [fcssUmlLanguagesAmount][FCSS_UML_ERROR_AMOUNT] = 
 {
 	{
 		"OK"

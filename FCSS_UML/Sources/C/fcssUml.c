@@ -147,7 +147,7 @@ main (int argc, char *argv[])
     default:
     break;
  	}
-	return (OK);
+	return (FCSS_UML_OK);
 }
 
 

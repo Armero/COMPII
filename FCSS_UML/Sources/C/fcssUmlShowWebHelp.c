@@ -68,7 +68,7 @@ main (int argc, char *argv[])
   printf("    <a href=\"./fcssUmlMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                   stringConfigurationFileName,
                                                                                   stringLanguage,
-                                                                                  cgiText[language][20] );
+                                                                                  cgiText[language][19] );
   printf("    <a href=\"./fcssUmlMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,

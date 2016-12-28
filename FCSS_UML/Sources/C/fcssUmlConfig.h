@@ -46,42 +46,22 @@ $Log$
 	#define FCSS_UML_COOKIES_DIRECTORY							"/users/felipe.santos/private/EEL270/2016-2/FCSS_UML/Data/Cookies"
 	#endif
   
-
-/*	#ifndef FCSS_UML_WEB_SERVER_URL
-	#define FCSS_UML_WEB_SERVER_URL 								"http://www02.del.ufrj.br/~username/FCSS_UML" 
+	#ifndef MLDL_UML_USERS_DATA_FILENAME
+	#define MLDL_UML_USERS_DATA_FILENAME							"users"
 	#endif
 
-	#ifndef FCSS_NICKNAME
-	#define FCSS_NICKNAME 													"ADMIN"
+	#ifndef MLDL_UML_INVITED_USERS_DATA_FILENAME
+	#define MLDL_UML_INVITED_USERS_DATA_FILENAME			"invited.users"
 	#endif
 
-	#ifndef FCSS_PASSWORD
-	#define FCSS_PASSWORD 													"ADMIN"
+	#ifndef MLDL_UML_REQUESTING_USERS_DATA_FILENAME
+	#define MLDL_UML_REQUESTING_USERS_DATA_FILENAME		"requesting.users"
 	#endif
 
-	#ifndef FCSS_PASSWORD_CONFIRMATION
-	#define FCSS_PASSWORD_CONFIRMATION 							"ADMIN"
+	#ifndef MLDL_UML_LOCKED_USERS_DATA_FILENAME
+	#define MLDL_UML_LOCKED_USERS_DATA_FILENAME				"locked_users"
 	#endif
 
-	#ifndef FCSS_PROFILE_TYPE
-	#define FCSS_PROFILE_TYPE  											"ADMIN"
-	#endif
-
-	#ifndef FCSS_FULL_NAME
-	#define FCSS_FULL_NAME 													"ADMIN"
-	#endif
-
-	#ifndef FCSS_FULL_NAME_CONFIRMATION
-	#define FCSS_FULL_NAME_CONFIRMATION  						"ADMIN"
-	#endif
-
-	#ifndef FCSS_EMAIL
-	#define FCSS_EMAIL  														"felipesantos956@poli.ufrj.br"
-	#endif
-
-	#ifndef FCSS_EMAIL_CONFIRMATION
-	#define FCSS_EMAIL_CONFIRMATION  								"felipesantos956@poli.ufrj.br"
-	#endif*/
 
 #endif
 
