@@ -12,8 +12,6 @@ $Log$
 
 #include "fcssUmlCgiTexts.h"
 
-
-
 char *cgiText[fcssUmlLanguagesAmount][FCSS_UML_CGI_MAIN_TEXTS] =
 {
   {

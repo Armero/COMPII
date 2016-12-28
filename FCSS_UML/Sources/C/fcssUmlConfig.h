@@ -37,29 +37,21 @@ $Log$
 	#ifndef FCSS_UML_PRIVATE_ROOT_DIRECTORY
 	#define FCSS_UML_PRIVATE_ROOT_DIRECTORY					"/users/felipe.santos/private/EEL270/2016-2/FCSS_UML/"
 	#endif
-
-	#ifndef FCSS_UML_DATA_DIRECTORY
-	#define FCSS_UML_DATA_DIRECTORY									"/users/felipe.santos/private/EEL270/2016-2/FCSS_UML/Data"
-	#endif
-
-	#ifndef FCSS_UML_COOKIES_DIRECTORY
-	#define FCSS_UML_COOKIES_DIRECTORY							"/users/felipe.santos/private/EEL270/2016-2/FCSS_UML/Data/Cookies"
-	#endif
   
-	#ifndef MLDL_UML_USERS_DATA_FILENAME
-	#define MLDL_UML_USERS_DATA_FILENAME							"users"
+	#ifndef FCSS_UML_USERS_DATA_FILENAME
+	#define FCSS_UML_USERS_DATA_FILENAME							"users"
 	#endif
 
-	#ifndef MLDL_UML_INVITED_USERS_DATA_FILENAME
-	#define MLDL_UML_INVITED_USERS_DATA_FILENAME			"invited.users"
+	#ifndef FCSS_UML_INVITED_USERS_DATA_FILENAME
+	#define FCSS_UML_INVITED_USERS_DATA_FILENAME			"invited.users"
 	#endif
 
-	#ifndef MLDL_UML_REQUESTING_USERS_DATA_FILENAME
-	#define MLDL_UML_REQUESTING_USERS_DATA_FILENAME		"requesting.users"
+	#ifndef FCSS_UML_REQUESTING_USERS_DATA_FILENAME
+	#define FCSS_UML_REQUESTING_USERS_DATA_FILENAME		"requesting.users"
 	#endif
 
-	#ifndef MLDL_UML_LOCKED_USERS_DATA_FILENAME
-	#define MLDL_UML_LOCKED_USERS_DATA_FILENAME				"locked_users"
+	#ifndef FCSS_UML_LOCKED_USERS_DATA_FILENAME
+	#define FCSS_UML_LOCKED_USERS_DATA_FILENAME				"locked_users"
 	#endif
 
 

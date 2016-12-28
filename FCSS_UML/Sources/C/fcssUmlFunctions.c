@@ -29,6 +29,7 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 
 	char temporaryDirectory	[FCSS_UML_DIRECTORY_LENGTH + 1];
 	char temporaryEmail			[FCSS_UML_EMAIL_LENGTH + 1];
+	char temporaryFileName 	[FCSS_UML_FILENAME_LENGTH + 1];
 	char *defaultOptions [] =
 	{
 		"FCSS_UML_ROOT_DIRECTORY",
@@ -36,6 +37,11 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 		"FCSS_UML_COOKIES_DIRECTORY",
 		"FCSS_UML_ADMINISTRATOR_USER_IDENTIFIER",
 		"FCSS_UML_ADMINISTRATOR_EMAIL",
+		"FCSS_UML_PRIVATE_ROOT_DIRECTORY",
+		"FCSS_UML_USERS_DATA_FILENAME",
+		"FCSS_UML_INVITED_USERS_DATA_FILENAME",
+		"FCSS_UML_REQUESTING_USERS_DATA_FILENAME",
+		"FCSS_UML_LOCKED_USERS_DATA_FILENAME",
 	};
 
 	
@@ -44,6 +50,11 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 	strncpy(options->cookiesDirectory, FCSS_UML_COOKIES_DIRECTORY, FCSS_UML_DIRECTORY_LENGTH + 1);
 	options->administratorIdentifier = (fcssUmlUserIdentifierType) FCSS_UML_ADMINISTRATOR_USER_IDENTIFIER;
 	strncpy(options->administratorEmail, FCSS_UML_ADMINISTRATOR_EMAIL, FCSS_UML_EMAIL_LENGTH + 1);
+	strncpy(options->privateRootDirectory, FCSS_UML_PRIVATE_ROOT_DIRECTORY, FCSS_UML_DIRECTORY_LENGTH + 1);
+	strncpy(options->usersDataFileName, FCSS_UML_USERS_DATA_FILENAME, FCSS_UML_FILENAME_LENGTH + 1);
+	strncpy(options->invitedUsersDataFileName, FCSS_UML_INVITED_USERS_DATA_FILENAME, FCSS_UML_FILENAME_LENGTH + 1);
+	strncpy(options->requestingUsersDataFilename, FCSS_UML_REQUESTING_USERS_DATA_FILENAME, FCSS_UML_FILENAME_LENGTH + 1);
+	strncpy(options->lockedUsersDataFileName, FCSS_UML_LOCKED_USERS_DATA_FILENAME, FCSS_UML_FILENAME_LENGTH + 1);
 
 	/*verify length of the strings before copying*/
 	numberOfOptions = (unsigned) sizeof(defaultOptions) / sizeof(char *);
@@ -74,8 +85,28 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 			break;
 			case(ADMINISTRATOR_EMAIL):
 				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryEmail, index, defaultOptions, FCSS_UML_EMAIL_LENGTH))
-					strncpy(options->administratorEmail, temporaryDirectory, FCSS_UML_EMAIL_LENGTH + 1);
+					strncpy(options->administratorEmail, temporaryEmail, FCSS_UML_EMAIL_LENGTH + 1);
 			break;
+			case(PRIVATE_ROOT_DIRECTRY):
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryDirectory, index, defaultOptions, FCSS_UML_DIRECTORY_LENGTH))
+					strncpy(options->privateRootDirectory, temporaryDirectory, FCSS_UML_DIRECTORY_LENGTH + 1);
+			break;
+			case(USERS_DATA_FILENAME):
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryFileName, index, defaultOptions, FCSS_UML_FILENAME_LENGTH))
+					strncpy(options->usersDataFileName, temporaryFileName, FCSS_UML_FILENAME_LENGTH + 1);
+			break;
+			case(INVITED_USERS_DATA_FLENAME):
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryFileName, index, defaultOptions, FCSS_UML_FILENAME_LENGTH))
+					strncpy(options->invitedUsersDataFileName, temporaryFileName, FCSS_UML_FILENAME_LENGTH + 1);
+			break;
+			case(REQUESTING_USERS_DATA_FILENAME):
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryFileName, index, defaultOptions, FCSS_UML_FILENAME_LENGTH))
+					strncpy(options->requestingUsersDataFilename, temporaryFileName, FCSS_UML_FILENAME_LENGTH + 1);
+			break;
+			case(LOCKED_USERS_DATA_FILENAME):
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryFileName, index, defaultOptions, FCSS_UML_FILENAME_LENGTH))
+					strncpy(options->lockedUsersDataFileName, temporaryFileName, FCSS_UML_FILENAME_LENGTH + 1);
+			break;	
 		}
 		index++;
 	}
@@ -139,69 +170,6 @@ FcssUmlGetNumericOptionFromFile (FILE *configurationFile, unsigned *temporaryNum
 	}
 	
 	return(false);
-}
-
-void 
-FcssUmlInitializeNcursesWindows		(WINDOW **menu, WINDOW **topBar, WINDOW **footer, int heightBar, int widthBar, int numberOfColumns, int numberOfRows)
-{
-	*topBar = newwin (heightBar, widthBar - 5, 1, 1);
-	*footer = newwin (heightBar + 4, widthBar - 5, numberOfRows - 6, 1);
-	*menu =   newwin (numberOfRows, numberOfColumns, 0, 0);
-}
-
-void 
-FcssUmlDrawNcursesMenu(WINDOW *menu, int highlight, int n_choices, fcssUmlLanguageType language, char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS])
-{
-	int row, column, index;	
-
-	row = 2;
-	column = 3;
-	box(menu, 0, 0);
-	for(index = 0; index < n_choices; ++index)
-	{	
-		if(highlight == index + 1) /* Highlight the present choice */
-		{	wattron(menu, A_REVERSE); 
-			mvwprintw(menu, column, row, "%s", choices[language][index]);
-			wattroff(menu, A_REVERSE);
-		}
-		else
-			mvwprintw(menu, column, row, "%s", choices[language][index]);
-		column++;
-	}
-	wrefresh(menu);
-}
-
-void 
-FcssUmlDrawNcursesTopBar (WINDOW *topBar, int numberOfColumns, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT])
-{
-	int centerX = (numberOfColumns/2) - (strlen(extraText[language][0])/2);
-
-	wclear(topBar);
-	wbkgd(topBar, COLOR_PAIR(1));
-	mvwprintw(topBar, 0, centerX, "%s", extraText[language][0]);
-	wrefresh(topBar);
-}
-
-void 
-FcssUmlDrawNcursesFooter (WINDOW *footer, int numberOfColumns, int numberOfRows, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT])
-{
-	int centerX = (numberOfColumns/2) - (strlen(extraText[language][1])/2);
-
-	wclear(footer);
-	wbkgd(footer, COLOR_PAIR(1));
-	mvwprintw(footer, 0, centerX, extraText[language][1]);
-	mvwprintw(footer, 1, centerX, extraText[language][2]);
-	mvwprintw(footer, 4, centerX, "%s", extraText[language][3]);
-	curs_set(0);
-	wrefresh(footer);
-}
-
-void 
-FcssUmlCloseNcursesInterface  ()
-{
-	clrtoeol();
-	refresh();
-	endwin();
 }
 
 void
@@ -376,6 +344,68 @@ FcssUmlCreateRandomString (char *validChars, size_t length, char *outputString)
 
 	return (0);
 }
+
+fcssUmlErrorType
+FcssUmlCreateNickname (char *fullName, char *firstOption, char *secondOption)
+{	
+	char firstName [20];
+	char lastName  [20];
+	char otherName [20];
+	unsigned wordEnd = 0;
+	unsigned fullNameLength = strlen(fullName);
+
+
+	if (!fullName)
+	{
+		//return(1);
+	}
+
+	lastName[0] = EOS;
+	otherName[0] = EOS;
+
+	while ((fullName[wordEnd] != ' ') && (fullName[wordEnd]))
+		wordEnd++;
+
+	strncpy (firstName, fullName, wordEnd);
+
+	firstName[wordEnd] = '.';
+	firstName[wordEnd + 1] = EOS;
+	fullName += wordEnd + 1;
+	wordEnd = 0;
+
+
+	if ( strlen(firstName) < fullNameLength )
+	{
+		while (fullName[wordEnd])
+		{
+			while ( (fullName[wordEnd] != ' ') && (fullName[wordEnd]) )
+				wordEnd++;
+
+			strcpy(otherName,lastName);
+			strncpy(lastName, fullName, wordEnd);
+
+			lastName[wordEnd] = EOS;
+			fullName += wordEnd + 1;
+			wordEnd = 0;
+		}
+	}
+
+	if (!strlen(lastName))
+	{
+		firstOption[0] = EOS;
+		secondOption[0] = EOS;
+		return (2);
+	}
+
+	if (!strlen(otherName))
+		secondOption[0] = EOS;
+	else
+		FcssUmlGetAbsolutFileName(firstName, otherName, secondOption);
+	
+	FcssUmlGetAbsolutFileName(firstName, lastName, firstOption);	
+	return (FCSS_UML_OK);
+}
+
 /* $RCSfile$ */
 
 

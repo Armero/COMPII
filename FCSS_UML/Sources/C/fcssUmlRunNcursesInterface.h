@@ -14,7 +14,7 @@ $Log$
 
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
-#include "fcssUmlFunctions.h"
+#include "fcssUmlNcursesFunctions.h"
 #include "fcssUmlShowNcursesHelp.h"
 #include <ncurses.h>
 #include <string.h>

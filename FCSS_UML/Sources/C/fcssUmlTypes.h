@@ -54,6 +54,11 @@ typedef struct
 	char cookiesDirectory 								[FCSS_UML_DIRECTORY_LENGTH + 1];
 	fcssUmlUserIdentifierType				 			administratorIdentifier;
 	char administratorEmail								[FCSS_UML_EMAIL_LENGTH + 1];
+	char privateRootDirectory 						[FCSS_UML_DIRECTORY_LENGTH + 1];
+	char usersDataFileName 								[FCSS_UML_FILENAME_LENGTH + 1];
+	char invitedUsersDataFileName 				[FCSS_UML_FILENAME_LENGTH + 1];
+	char requestingUsersDataFilename 			[FCSS_UML_FILENAME_LENGTH + 1];
+	char lockedUsersDataFileName 					[FCSS_UML_FILENAME_LENGTH + 1];
 } fcssUmlConfigurationOptionsType;
 
 typedef enum 
@@ -85,6 +90,11 @@ typedef enum
 	COOKIES_DIRECTORY,
 	ADMINISTRATOR_USER,
 	ADMINISTRATOR_EMAIL,
+	PRIVATE_ROOT_DIRECTRY,
+	USERS_DATA_FILENAME,
+	INVITED_USERS_DATA_FLENAME,
+	REQUESTING_USERS_DATA_FILENAME,
+	LOCKED_USERS_DATA_FILENAME,
 } fcssUmlConfigurationsName;
 
 #endif

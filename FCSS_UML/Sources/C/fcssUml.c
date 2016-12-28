@@ -84,6 +84,12 @@ main (int argc, char *argv[])
   printf("cookies dir: %s\n",configurationOptions->cookiesDirectory);
   printf("admin id dir: %llu\n",configurationOptions->administratorIdentifier);
   printf("adminEmail dir: %s\n",configurationOptions->administratorEmail);
+  printf("privateRootDirectory dir: %s\n",configurationOptions->privateRootDirectory);
+  printf("usersDataFileName dir: %s\n",configurationOptions->usersDataFileName);
+  printf("invitedUsersDataFileName dir: %s\n",configurationOptions->invitedUsersDataFileName);
+  printf("requestingUsersDataFilename dir: %s\n",configurationOptions->requestingUsersDataFilename);
+  printf("lockedUsersDataFileName dir: %s\n",configurationOptions->lockedUsersDataFileName);
+
  	while ((option = getopt_long(argc, argv, optionsShortTypes, longOptions, &command)) != -1 )
  	{
     printf("option: %c\n", option);

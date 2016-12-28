@@ -16,6 +16,7 @@
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
 #include "fcssUmlCgiTexts.h"
+#include "fcssUmlFunctions.h"
 #include "Libraries/mlcgi.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -54,7 +55,7 @@ main (int argc, char *argv[])
     return (ML_CGI_OK);
   }
 
-  language = !strcmp(stringLanguage, "portuguese")?fcssUmlPortuguese:fcssUmlEnglish;
+  language = FcssUmlGetLanguageIndex (stringLanguage);
 
   mlCgiBeginHttpHeader ("text/html");
   mlCgiEndHttpHeader ();
@@ -139,8 +140,8 @@ main (int argc, char *argv[])
   printf("    </form>\n");
   printf("  </div>\n");
   printf("  <div align=\"center\" bgcolor=\"gray\">\n");
-  printf("    <br>%s<br>\n", cgiText[language][7]);
-  printf("    %s<br>\n", cgiText[language][8]);
+  printf("    <br>%s<br>\n", cgiText[language][9]);
+  printf("    %s<br>\n", cgiText[language][10]);
   printf("  </div>\n");
   printf("</body>\n");
   printf("</html>\n");

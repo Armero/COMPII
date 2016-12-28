@@ -10,8 +10,8 @@ $Date$
 $Log$
 */ 
 
-#ifndef FCSSUMLFUNCTIONS_H
-#define FCSSUMLFUNCTIONS_H "@(#)fcssUmlFunctions.h $Revisions$"
+#ifndef FCSSUMLCGITEXYTS_H
+#define FCSSUMLCGITEXYTS_H "@(#)fcssUmlFunctions.h $Revisions$"
 
 #include "fcssUmlTypes.h"
 #include "fcssUmlConst.h"

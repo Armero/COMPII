@@ -28,7 +28,7 @@ main (int argc, char *argv[])
 	string2 = (char *) malloc (200 * sizeof(char));
 	string3 = (char *) malloc (200 * sizeof(char));
 
-  strcpy(string1, "Felipe Claudio da Silva Santos");
+  strcpy(string1, "Felipe ");
   string2[0] = EOS;
   string3[0] = EOS;
 

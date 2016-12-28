@@ -15,11 +15,13 @@
 #include "fcssUmlConst.h"
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
-#include "Libraries/mlcgi.h"
 #include "fcssUmlCgiTexts.h"
+#include "fcssUmlFunctions.h"
+#include "Libraries/mlcgi.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 
 int
 main (int argc, char *argv[])
@@ -54,7 +56,7 @@ main (int argc, char *argv[])
     return (ML_CGI_OK);
   }
 
-  language = !strcmp(stringLanguage, "portuguese")?fcssUmlPortuguese:fcssUmlEnglish;
+  language = FcssUmlGetLanguageIndex (stringLanguage);
 
   mlCgiBeginHttpHeader ("text/html");
   mlCgiEndHttpHeader ();
