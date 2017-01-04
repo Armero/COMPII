@@ -40,6 +40,7 @@ main (int argc, char *argv[])
   fcssUmlUserDataType user;
   boolean endOptions = 0;
   char fcssUmlConfigurationFileName[FCSS_UML_FILENAME_LENGTH + 1];
+  char *bufferPassword;
 
 
   static struct option longOptions [] =
@@ -209,7 +210,15 @@ main (int argc, char *argv[])
   /*Must be inside fcssUmlAddUser*/
   if ( ((fcssUmlUserIdentifierType) getuid()) == configurationOptions->administratorIdentifier)
   {
-    printf("FUNCIONA!\n");
+      bufferPassword = getpass ("password: ");
+      strcpy (user.password, bufferPassword);
+      memset (bufferPassword, 0x00, strlen (bufferPassword));
+      printf("user.password: %s\n", user.password);
+
+      bufferPassword = getpass ("password confirmation: ");
+      strcpy (user.passwordConfirmation, bufferPassword);
+      memset (bufferPassword, 0x00, strlen (bufferPassword));
+      printf("user.password: %s\n", user.passwordConfirmation);
   }
   /*Must be inside fcssUmlAddUser*/
 
