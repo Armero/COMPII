@@ -29,7 +29,7 @@ typedef enum
 } fcssUmlLanguageType;
 
 
-typedef unsigned long long fcssUmlUserIdentifierType;
+typedef unsigned long long 	fcssUmlUserIdentifierType;
 
 typedef unsigned long long  fcssUmlProfileType;
 
@@ -65,7 +65,8 @@ typedef enum
 {
 	HELP,
 	ADD_USER,
-	NCURSES
+	NCURSES,
+	CONFIGURE
 } fcssFunctionSelect;
 
 typedef enum 
@@ -96,6 +97,14 @@ typedef enum
 	REQUESTING_USERS_DATA_FILENAME,
 	LOCKED_USERS_DATA_FILENAME,
 } fcssUmlConfigurationsName;
+
+typedef enum
+{
+	fcssUmlDes							= 0,
+	fcssUmlMd5 							= 1,
+	fcssUmlSha256 					= 5,
+	fcssUmlSha512						= 6,	
+} fcssUmlCryptAlgorithms;
 
 #endif
 

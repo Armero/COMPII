@@ -10,7 +10,6 @@ $Date$
 $Log$
 */ 
 
-#define _XOPEN_SOURCE 500
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
 #include "fcssUmlShowCliHelp.h"
@@ -22,6 +21,7 @@ $Log$
 #include <stdio.h>
 #include <getopt.h>
 #include <string.h>
+#include <sys/types.h>
 
 
 
@@ -37,6 +37,7 @@ main (int argc, char *argv[])
   fcssUmlErrorType error;
   fcssUmlConfigurationOptionsType *configurationOptions;
   fcssUmlLanguageType languageChoice = fcssUmlEnglish;
+  fcssUmlUserDataType user;
   boolean endOptions = 0;
   char fcssUmlConfigurationFileName[FCSS_UML_FILENAME_LENGTH + 1];
 
@@ -45,7 +46,7 @@ main (int argc, char *argv[])
   {
     {"help", 0 , NULL, 'h'},
     {"Ncurses", 0 , NULL, 'N'},
-  	{"Configure", 0, NULL, 'c'},
+  	{"Configure", 0, NULL, 'C'},
   	{"add", 0, NULL, 'a'},
   	{"invite", 0, NULL, 'i'},
   	{NULL, 0, NULL, 0}
@@ -53,12 +54,20 @@ main (int argc, char *argv[])
 
   enum fcssSubOpts{
     LANGUAGE = 0,
+    USERNAME = 1,
+    CONFIRM_USERNAME = 2,
+    EMAIL = 3,
+    CONFIRM_EMAIL = 4,
     THE_END
   };
 
   char *const subOptions[] = 
   {
-    [LANGUAGE]   = "language",
+    [LANGUAGE]  = "language",
+    [USERNAME]  = "username",
+    [CONFIRM_USERNAME]  = "confirm-username",
+    [EMAIL]  = "email",
+    [CONFIRM_EMAIL] = "confirm-email",
     NULL
   };
 
@@ -90,6 +99,18 @@ main (int argc, char *argv[])
   printf("requestingUsersDataFilename dir: %s\n",configurationOptions->requestingUsersDataFilename);
   printf("lockedUsersDataFileName dir: %s\n",configurationOptions->lockedUsersDataFileName);
 
+  user.identifier = 0;
+  user.nickName[0] = EOS;
+  user.password[0] = EOS;
+  user.passwordConfirmation[0] = EOS;
+  user.profileType = 0;
+  user.fullName[0] = EOS;
+  user.fullNameConfirmation[0] = EOS;
+  user.email[0] = EOS;
+  user.emailConfirmation[0] = EOS;
+  user.previous = NULL;
+  user.next = NULL;
+
  	while ((option = getopt_long(argc, argv, optionsShortTypes, longOptions, &command)) != -1 )
  	{
     printf("option: %c\n", option);
@@ -105,18 +126,20 @@ main (int argc, char *argv[])
         printf("subopts: %s\n", subopts);
 
         if (subopts)
-        while ((*subopts != '\0') && (!endOptions))
- 				{ 
-          switch (getsubopt(&subopts, subOptions, &value))
-          {
-            case (LANGUAGE):
-              languageChoice = FcssUmlGetLanguageIndex(value);
-            break;
-            default:
-              endOptions = true;
+        {
+          while ((*subopts != '\0') && (!endOptions))
+   				{ 
+            switch (getsubopt(&subopts, subOptions, &value))
+            {
+              case (LANGUAGE):
+                languageChoice = FcssUmlGetLanguageIndex(value);
+              break;
+              default:
+                endOptions = true;
+            }
+            subopts++;
           }
         }
-
       /* transform this block above in an auxiliary function*/
       break;
       case 'N':
@@ -124,23 +147,71 @@ main (int argc, char *argv[])
         subopts = argv[optind];
         printf("subopts: %s\n", subopts);
         if (subopts)
-        while ((*subopts != '\0') && (!endOptions))
-        { 
-          switch (getsubopt(&subopts, subOptions, &value))
-          {
-            case (LANGUAGE):
-              languageChoice = FcssUmlGetLanguageIndex(value);
-            break;
-            default:
-              endOptions = true;
+        {
+          while ((*subopts != '\0') && (!endOptions))
+          { 
+            switch (getsubopt(&subopts, subOptions, &value))
+            {
+              case (LANGUAGE):
+                languageChoice = FcssUmlGetLanguageIndex(value);
+              break;
+              default:
+                endOptions = true;
+            }
+            subopts++;
           }
         }
  			break;
 
+      case 'C':
+        selection = CONFIGURE;
+        subopts = argv[optind];
+        printf("subopts: %s\n", subopts);
+        if (subopts)
+        {
+          while ((*subopts != '\0') && (!endOptions))
+          { 
+            switch (getsubopt(&subopts, subOptions, &value))
+            {
+              case (LANGUAGE):
+                languageChoice = FcssUmlGetLanguageIndex(value);
+              break;
+              case (USERNAME):
+                strcpy(user.fullName, value);
+              break;
+              case (CONFIRM_USERNAME):
+                strcpy(user.fullNameConfirmation, value);
+              break;
+              case (EMAIL):
+                strcpy(user.email, value);
+              break;
+              case (CONFIRM_EMAIL):
+                strcpy(user.emailConfirmation, value);
+              break;                                                
+              default:
+                endOptions = true;
+            }
+            subopts++;
+          }
+        }
+      break;
  			default:
  				endOptions = true;
  		}
  	} 
+
+  printf("\n\n\n");
+  printf("user.username: %s\n", user.fullName);
+  printf("user.usernameConfirmation: %s\n", user.fullNameConfirmation);
+  printf("user.email: %s\n", user.email);
+  printf("user.emailConfirmation: %s\n", user.emailConfirmation);
+
+  /*Must be inside fcssUmlAddUser*/
+  if ( ((fcssUmlUserIdentifierType) getuid()) == configurationOptions->administratorIdentifier)
+  {
+    printf("FUNCIONA!\n");
+  }
+  /*Must be inside fcssUmlAddUser*/
 
  	switch (selection)
  	{

@@ -24,12 +24,15 @@ fcssUmlErrorType
 FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOptionsType *options)
 {
 	FILE *configurationFile;
-	unsigned numberOfOptions, temporaryNumber;
 	fcssUmlConfigurationsName index;
+	unsigned numberOfOptions;
+	fcssUmlUserIdentifierType temporaryNumber;
 
-	char temporaryDirectory	[FCSS_UML_DIRECTORY_LENGTH + 1];
-	char temporaryEmail			[FCSS_UML_EMAIL_LENGTH + 1];
-	char temporaryFileName 	[FCSS_UML_FILENAME_LENGTH + 1];
+	char temporaryDirectory			[FCSS_UML_DIRECTORY_LENGTH + 1];
+	char temporaryEmail					[FCSS_UML_EMAIL_LENGTH + 1];
+	char temporaryFileName 			[FCSS_UML_FILENAME_LENGTH + 1];
+	char temporaryNumberString 	[FCSS_UML_NUMBER_LENGTH + 1];
+	char *validation;
 	char *defaultOptions [] =
 	{
 		"FCSS_UML_ROOT_DIRECTORY",
@@ -60,9 +63,8 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 	numberOfOptions = (unsigned) sizeof(defaultOptions) / sizeof(char *);
 	index = ROOT_DIRECTORY;
 	if ( !(configurationFile = fopen(fileName, "r")) )
- 	{
  		return (FCSS_UML_CONFIGURATION_FILE_NOT_FOUND);
- 	}
+
 	while (index < numberOfOptions)
 	{
 		switch (index)
@@ -80,8 +82,12 @@ FcssUmlGetConfigurationOptionsValues (char *fileName, fcssUmlConfigurationOption
 					strncpy(options->cookiesDirectory, temporaryDirectory, FCSS_UML_DIRECTORY_LENGTH + 1);
 			break;
 			case(ADMINISTRATOR_USER):
-				if (FcssUmlGetNumericOptionFromFile(configurationFile, &temporaryNumber, index, defaultOptions, FCSS_UML_DEFAULT_LINE_LENGTH))
-					options->administratorIdentifier = temporaryNumber;
+				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryNumberString, index, defaultOptions, FCSS_UML_EMAIL_LENGTH))
+				{
+					temporaryNumber = (fcssUmlUserIdentifierType) strtoul(temporaryNumberString, &validation, 10);
+					if (!(*validation))
+						options->administratorIdentifier = temporaryNumber;
+				}
 			break;
 			case(ADMINISTRATOR_EMAIL):
 				if (FcssUmlGetStringOptionFromFile(configurationFile, temporaryEmail, index, defaultOptions, FCSS_UML_EMAIL_LENGTH))
@@ -142,36 +148,6 @@ FcssUmlGetStringOptionFromFile (FILE *configurationFile, char *temporaryString, 
 	return(false);
 }
 
-boolean
-FcssUmlGetNumericOptionFromFile (FILE *configurationFile, unsigned *temporaryNumber, unsigned index, char *defaultOptions[], int lineLength)
-{
-	unsigned memberLength = strlen(defaultOptions[index]);
-	unsigned stringIndex = memberLength;
-	unsigned auxiliaryIndex = 0;
-	char temporaryBuffer [lineLength + 1];
-	char temporaryString [lineLength + 1];
-	char *validation;
-
-	while (fgets(temporaryBuffer, lineLength, configurationFile))
-	{
-		if (!strncmp(temporaryBuffer, defaultOptions[index], memberLength))
-		{
-			stringIndex ++; /*after the equal sign*/
-			while (temporaryBuffer[stringIndex])
-			{
-				temporaryString[auxiliaryIndex] = temporaryBuffer[stringIndex];
-				auxiliaryIndex++;
-				stringIndex++;
-			}
-			temporaryString[auxiliaryIndex] = EOS;
-			*temporaryNumber = (unsigned) strtoul(temporaryString, &validation, 10);
-			return (true);
-		}			
-	}
-	
-	return(false);
-}
-
 void
 FcssUmlGetAbsolutFileName (char *string1, char *string2, char *outputString)
 {
@@ -213,7 +189,7 @@ FcssUmlCheckStringField (char *stringInput, char *validChars, size_t minimumLeng
 		index++;
 	}
 	if (!isValidString)
-		//return(3);
+		return(3);
 
 	return (0);
 }
@@ -332,17 +308,17 @@ FcssUmlCreateRandomString (char *validChars, size_t length, char *outputString)
 
 	if (!validChars)
 	{
-		//return(1);
+		return(1);
 	}
 	srand(time(NULL));
-	while (index < length)
+	while (index <= length)
 	{
 		outputString[index] = validChars[(unsigned) rand() % stringLength];
 		index++;
 	}
 	outputString[index] = EOS;
 
-	return (0);
+	return (FCSS_UML_OK);
 }
 
 fcssUmlErrorType
@@ -403,6 +379,123 @@ FcssUmlCreateNickname (char *fullName, char *firstOption, char *secondOption)
 		FcssUmlGetAbsolutFileName(firstName, otherName, secondOption);
 	
 	FcssUmlGetAbsolutFileName(firstName, lastName, firstOption);	
+	return (FCSS_UML_OK);
+}
+
+fcssUmlErrorType
+FcssUmlGetCryptAlgorithm (char *passwordString, fcssUmlCryptAlgorithms *algorithmType)
+{
+	unsigned lengthPasswordString;
+	
+
+	if (!passwordString)
+	{
+		return (1); // not a valid string
+	}
+
+	lengthPasswordString = strlen(passwordString);
+
+	if ((lengthPasswordString) >= FCSS_UML_SHA512_LENGTH_MINIMUM_LENGTH)
+		*algorithmType = fcssUmlSha512; 
+
+	else if ((lengthPasswordString) >= FCSS_UML_SHA256_LENGTH_MINIMUM_LENGTH)
+		*algorithmType = fcssUmlSha256; 
+
+	else if ((lengthPasswordString) >= FCSS_UML_MD5_LENGTH_MINIMUM_LENGTH)
+		*algorithmType = fcssUmlMd5; 
+
+	else
+		*algorithmType = fcssUmlDes;
+
+	return (FCSS_UML_OK);
+}
+
+fcssUmlErrorType
+FcssUmlEncodePasswordWithSpecificAlgorithm (char *plainPassword, fcssUmlCryptAlgorithms algorithmType, char *encodedPassword)
+{
+	char saltPart[FCSS_UML_SALT_LENGTH + 1]; 
+	char salt 	 [FCSS_UML_SALT_LENGTH + 5]; /* $id$ */
+	char *stringBuffer;
+	FcssUmlCreateRandomString (FCSS_UML_RANDOM_STRING_VALID_CHARACTERS, FCSS_UML_SALT_LENGTH, saltPart);
+
+	if (!plainPassword)
+	{
+		return(1); //not a valid string
+	}
+
+	switch(algorithmType)
+	{
+		case (fcssUmlDes):
+			salt[0] = EOS;
+		break;
+		case (fcssUmlMd5):
+			strcpy(salt, "$1$");	
+		break;
+		case (fcssUmlSha256):
+			strcpy(salt, "$5$");
+		break;
+		case (fcssUmlSha512):
+			strcpy(salt, "$6$");
+		break;
+	}
+
+	strcat(salt, saltPart);
+	if (algorithmType != fcssUmlDes)
+		strcat (salt, "$");
+
+	stringBuffer = crypt(plainPassword, salt);
+	strcpy(encodedPassword, stringBuffer);
+	memset(stringBuffer, 0x00, strlen(stringBuffer));
+	return (FCSS_UML_OK);
+}
+
+fcssUmlErrorType
+FcssUmlEncodePasswordWithSpecificSalt (char *plainPassword, char *salt, char *encodedPassword)
+{
+	char *stringBuffer;
+	if (!plainPassword)
+		return(1);
+
+	if (!salt)
+		return(2);
+
+	stringBuffer = crypt(plainPassword, salt);
+	strcpy(encodedPassword, stringBuffer);
+	memset(stringBuffer, 0x00, strlen(stringBuffer));
+
+	return(FCSS_UML_OK);
+}
+
+fcssUmlErrorType
+FcssUmlCheckPassword (char *plainPassword, char *encodedPassword)
+{
+	printf("encodedPassword1: \n\"%s\"\n", encodedPassword);
+	unsigned counter = 1;
+	unsigned index = 4;
+	char temporaryPassword[FCSS_UML_PASSWORD_LENGTH + 1];
+
+	char salt [FCSS_UML_SALT_LENGTH + 1];
+	if (encodedPassword[0] != '$')
+		strcpy (salt, encodedPassword);
+
+	else
+	{
+		while (encodedPassword[index] != '$')
+		{
+			index++;
+			counter++;
+		}
+
+		strncpy (salt, encodedPassword, counter + 4);
+		salt[counter + 5] = EOS;
+	}
+	
+	FcssUmlEncodePasswordWithSpecificSalt(plainPassword, salt, temporaryPassword);
+	if (strcmp(temporaryPassword, encodedPassword))
+	{
+		return(1);
+	}
+
 	return (FCSS_UML_OK);
 }
 

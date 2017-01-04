@@ -23,7 +23,8 @@ AR = ar
 #AFLAGS = as flags utilazadas pelo compilador de bibliotecas
 CFLAGS = -Wall
 LFLAGS = -Wall
-AFLAGS = -lncurses
+AFLAGS = -lncurses\
+				 -lcrypt
 
 ALL = $(EXECS)
 EXECS = $(FCSSUMLEXECS) $(FCSSUMLEXECSCGI)
