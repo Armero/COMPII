@@ -15,6 +15,7 @@ $Log$
 #include "fcssUmlShowCliHelp.h"
 #include "fcssUmlFunctions.h"
 #include "fcssUmlRunNcursesInterface.h"
+#include "fcssUmlUserInterface.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -33,8 +34,8 @@ main (int argc, char *argv[])
   char *subopts = NULL;
   char *value = NULL;
   int option, command;
-  fcssFunctionSelect selection = HELP;
-  fcssUmlErrorType error;
+  fcssFunctionSelect selection = EMPTY;
+  fcssUmlErrorType umlError;
   fcssUmlConfigurationOptionsType *configurationOptions;
   fcssUmlLanguageType languageChoice = fcssUmlEnglish;
   fcssUmlUserDataType user;
@@ -77,28 +78,23 @@ main (int argc, char *argv[])
   strcpy(optionsShortTypes, FCSS_UML_SHORT_OPTIONS);
   strcpy(fcssUmlConfigurationFileName, FCSS_UML_CONFIGURATION_FILE);
 
-	// if ( (error = FcssUmlGetConfigurationOptionsValues (filename, configurationOptions)) )
-	// {
-	// 	/*should print something*/
-	// 	exit (error);
-	// }
-
   configurationOptions = malloc(sizeof(fcssUmlConfigurationOptionsType));
-  if (FcssUmlGetConfigurationOptionsValues (fcssUmlConfigurationFileName, configurationOptions))
+  if ( (umlError = FcssUmlGetConfigurationOptionsValues (fcssUmlConfigurationFileName, configurationOptions)) ) 
   {
-    /*error*/
+    printf("%s\n", FcssUmlGetCliErrorMessage(languageChoice, umlError));
+    exit (umlError);
   }
 
-  printf("root dir: %s\n",configurationOptions->rootDirectory);
-  printf("data dir: %s\n",configurationOptions->dataDirectory);
-  printf("cookies dir: %s\n",configurationOptions->cookiesDirectory);
-  printf("admin id dir: %llu\n",configurationOptions->administratorIdentifier);
-  printf("adminEmail dir: %s\n",configurationOptions->administratorEmail);
-  printf("privateRootDirectory dir: %s\n",configurationOptions->privateRootDirectory);
-  printf("usersDataFileName dir: %s\n",configurationOptions->usersDataFileName);
-  printf("invitedUsersDataFileName dir: %s\n",configurationOptions->invitedUsersDataFileName);
-  printf("requestingUsersDataFilename dir: %s\n",configurationOptions->requestingUsersDataFilename);
-  printf("lockedUsersDataFileName dir: %s\n",configurationOptions->lockedUsersDataFileName);
+  // printf("root dir: %s\n",configurationOptions->rootDirectory);
+  // printf("data dir: %s\n",configurationOptions->dataDirectory);
+  // printf("cookies dir: %s\n",configurationOptions->cookiesDirectory);
+  // printf("admin id dir: %llu\n",configurationOptions->administratorIdentifier);
+  // printf("adminEmail dir: %s\n",configurationOptions->administratorEmail);
+  // printf("privateRootDirectory dir: %s\n",configurationOptions->privateRootDirectory);
+  // printf("usersDataFileName dir: %s\n",configurationOptions->usersDataFileName);
+  // printf("invitedUsersDataFileName dir: %s\n",configurationOptions->invitedUsersDataFileName);
+  // printf("requestingUsersDataFilename dir: %s\n",configurationOptions->requestingUsersDataFilename);
+  // printf("lockedUsersDataFileName dir: %s\n",configurationOptions->lockedUsersDataFileName);
 
   user.identifier = 0;
   user.nickName[0] = EOS;
@@ -120,10 +116,11 @@ main (int argc, char *argv[])
  			case 'a':
  				selection = ADD_USER;
  			break;
+
  			case 'h':
  				selection = HELP;
         subopts = argv[optind];
-        /* transform this block below in an auxiliary function*/
+
         printf("subopts: %s\n", subopts);
 
         if (subopts)
@@ -136,13 +133,16 @@ main (int argc, char *argv[])
                 languageChoice = FcssUmlGetLanguageIndex(value);
               break;
               default:
+                if (strncmp(value, FCSS_UML_END_SUBOPTIONS, 3))
+                  umlError = FCSS_UML_INVALID_SUBOPTION;
+
                 endOptions = true;
             }
             subopts++;
           }
         }
-      /* transform this block above in an auxiliary function*/
       break;
+
       case 'N':
         selection = NCURSES;
         subopts = argv[optind];
@@ -151,12 +151,16 @@ main (int argc, char *argv[])
         {
           while ((*subopts != '\0') && (!endOptions))
           { 
+            printf("AQUI\n");
             switch (getsubopt(&subopts, subOptions, &value))
             {
               case (LANGUAGE):
                 languageChoice = FcssUmlGetLanguageIndex(value);
               break;
               default:
+                if (strncmp(value, FCSS_UML_END_SUBOPTIONS, 3))if (strncmp(value, FCSS_UML_END_SUBOPTIONS, 3))
+                  umlError = FCSS_UML_INVALID_SUBOPTION;
+
                 endOptions = true;
             }
             subopts++;
@@ -190,49 +194,75 @@ main (int argc, char *argv[])
                 strcpy(user.emailConfirmation, value);
               break;                                                
               default:
+                if (strncmp(value, FCSS_UML_END_SUBOPTIONS, 3))
+                  umlError = FCSS_UML_INVALID_SUBOPTION;
+
                 endOptions = true;
             }
             subopts++;
           }
         }
       break;
+
  			default:
+        umlError = FCSS_UML_INVALID_OPTION;
  				endOptions = true;
  		}
  	} 
 
-  printf("\n\n\n");
-  printf("user.username: %s\n", user.fullName);
-  printf("user.usernameConfirmation: %s\n", user.fullNameConfirmation);
-  printf("user.email: %s\n", user.email);
-  printf("user.emailConfirmation: %s\n", user.emailConfirmation);
+  printf("umlError: %d\n", (int) umlError);
+  printf("languageChoice: %d\n", (int) languageChoice);
+  printf("errorAmount: %d\n", FCSS_UML_ERROR_AMOUNT);
 
-  /*Must be inside fcssUmlAddUser*/
-  if ( ((fcssUmlUserIdentifierType) getuid()) == configurationOptions->administratorIdentifier)
+  if (umlError)
   {
-      bufferPassword = getpass ("password: ");
-      strcpy (user.password, bufferPassword);
-      memset (bufferPassword, 0x00, strlen (bufferPassword));
-      printf("user.password: %s\n", user.password);
-
-      bufferPassword = getpass ("password confirmation: ");
-      strcpy (user.passwordConfirmation, bufferPassword);
-      memset (bufferPassword, 0x00, strlen (bufferPassword));
-      printf("user.password: %s\n", user.passwordConfirmation);
+    printf("%s\n", FcssUmlGetCliErrorMessage(languageChoice, umlError));
+    exit(umlError);
   }
+  // printf("\n\n\n");
+  // printf("user.username: %s\n", user.fullName);
+  // printf("user.usernameConfirmation: %s\n", user.fullNameConfirmation);
+  // printf("user.email: %s\n", user.email);
+  // printf("user.emailConfirmation: %s\n", user.emailConfirmation);
+
+  /*Must be inside fcssUmlAddUser*/
+  // if ( ((fcssUmlUserIdentifierType) getuid()) == configurationOptions->administratorIdentifier)
+  // {
+  //     bufferPassword = getpass ("password: ");
+  //     strcpy (user.password, bufferPassword);
+  //     memset (bufferPassword, 0x00, strlen (bufferPassword));
+  //     printf("user.password: %s\n", user.password);
+
+  //     bufferPassword = getpass ("password confirmation: ");
+  //     strcpy (user.passwordConfirmation, bufferPassword);
+  //     memset (bufferPassword, 0x00, strlen (bufferPassword));
+  //     printf("user.password: %s\n", user.passwordConfirmation);
+  // }
   /*Must be inside fcssUmlAddUser*/
 
- 	switch (selection)
- 	{
- 		case (HELP):
- 			FcssUmlShowCliHelp ( configurationOptions, languageChoice );
- 		break; 
-    case (NCURSES):
-      FcssUmlRunNcursesInterface (configurationOptions, "Felipe", languageChoice);
-    break;
-    default:
-    break;
- 	}
+  if (selection)
+  {
+   	switch (selection)
+   	{
+   		case (HELP):
+   			FcssUmlShowCliHelp ( configurationOptions, languageChoice );
+   		break; 
+      case (NCURSES):
+        FcssUmlRunNcursesInterface (configurationOptions, "Felipe", languageChoice);
+      break;
+      default:
+        umlError = FCSS_UML_INVALID_OPTION;
+        endOptions = true;
+      break;
+   	}
+  }
+
+  if (umlError)
+  {
+    printf("%s\n", FcssUmlGetCliErrorMessage(languageChoice, umlError));
+    exit(umlError);
+  }
+
 	return (FCSS_UML_OK);
 }
 

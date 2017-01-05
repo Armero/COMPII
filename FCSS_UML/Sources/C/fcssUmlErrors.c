@@ -14,49 +14,69 @@ $Log$
 char *fcssUmlCliErrorMessages [fcssUmlLanguagesAmount][FCSS_UML_ERROR_AMOUNT] = 
 {
 	{
-		"OK",
+		"OKA",
+		"Couldn't find configuration file",
+		"Invalid option",
+		"Invalid suboption",
+		"Invalid string length",
+		"Empty string",
+		"String with invalid content",
+		"Invalid nickname",
+		"Invalid email",
+		"String is nota full name",
+		"Wrong password"
 	},
 	{
 		"Sucesso",
+		"Arquivo de configuracao nao foi encontrado",
+		"Opcao invalida",
+		"Subopcao invalida",
+		"Comprimento da string invalido",
+		"String vazia",
+		"String com conteudo invalido",
+		"Apelido invalido",
+		"Email invalido",
+		"A string nao e um nome completo",
+		"Senha incorreta"
 	}
 };
 
 char *fcssUmlNcursesErrorMessages [fcssUmlLanguagesAmount][FCSS_UML_ERROR_AMOUNT] = 
 {
 	{
-		"OK"
+		"OKB",
 	},
 	{
-		"Sucesso"
+		"Sucesso",
 	}
 };
 
 char *fcssUmlWebErrorMessages [fcssUmlLanguagesAmount][FCSS_UML_ERROR_AMOUNT] = 
 {
 	{
-		"OK"
+		"OKC",
 	},
 	{
-		"Sucesso"
+		"Sucesso",
 	}
 };
 
 char *
 FcssUmlGetCliErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language)
 {
-	return (fcssUmlCliErrorMessages[(unsigned)language][(unsigned)error]);
+	return (fcssUmlCliErrorMessages[error][language]);
 }
 
 char *
 FcssUmlGetNcursesErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language)
 {
-	return (fcssUmlNcursesErrorMessages[(unsigned)language][(unsigned)error]);
+	return (fcssUmlNcursesErrorMessages[error][language]);
 }
 
 char *
 FcssUmlGetWebErrorMessage (fcssUmlErrorType error, fcssUmlLanguageType language)
 {
-	return (fcssUmlWebErrorMessages[(unsigned)language][(unsigned)error]);
+	return (fcssUmlWebErrorMessages[error][language]);
 }
 
 

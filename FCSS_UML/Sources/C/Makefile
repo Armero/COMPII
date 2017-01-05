@@ -49,7 +49,8 @@ FCSSUMLCLINCURSESOBJS 	= fcssUml.o\
 													fcssUmlShowCliHelp.o\
 													fcssUmlRunNcursesInterface.o\
 													fcssUmlShowNcursesHelp.o\
-													fcssUmlNcursesFunctions.o
+													fcssUmlUserInterface.o\
+													fcssUmlErrors.o
 													
 FCSSUMLCGIOBJS = $(FCSSUMLMAINCGIOBJS)\
 								 $(FCSSUMLLANGUAGECGIOBJS)\
@@ -59,23 +60,28 @@ FCSSUMLCGIOBJS = $(FCSSUMLMAINCGIOBJS)\
 
 FCSSUMLMAINCGIOBJS = fcssUmlCgiMain.o\
 										 fcssUmlFunctions.o\
-										 fcssUmlCgiTexts.o									 
+										 fcssUmlUserInterface.o\
+										 fcssUmlErrors.o									 
 
 FCSSUMLLANGUAGECGIOBJS = 	fcssUmlMain.o\
 													fcssUmlFunctions.o\
-										 			fcssUmlCgiTexts.o										 
+										 			fcssUmlUserInterface.o\
+										 			fcssUmlErrors.o										 
 										 
 FCSSUMLFORMCGIOBJS = fcssUmlShowRequestRegistrationForm.o\
 										 fcssUmlFunctions.o\
-										 fcssUmlCgiTexts.o
+										 fcssUmlUserInterface.o\
+										 fcssUmlErrors.o
 
 FCSSUMLHELPCGIOBJS = fcssUmlShowWebHelp.o\
 										 fcssUmlFunctions.o\
-										 fcssUmlCgiTexts.o
+										 fcssUmlUserInterface.o\
+										 fcssUmlErrors.o
 
 FCSSUMLLICENSECGIOBJS = fcssUmlShowLicense.o\
 												fcssUmlFunctions.o\
-										 		fcssUmlCgiTexts.o
+										 		fcssUmlUserInterface.o\
+										 		fcssUmlErrors.o
 
 CGITARGETS = 	fcssUmlCgiMain\
 							fcssUmlCgiLanguage\

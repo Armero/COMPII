@@ -15,7 +15,7 @@
 #include "fcssUmlConst.h"
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
-#include "fcssUmlCgiTexts.h"
+#include "fcssUmlUserInterface.h"
 #include "fcssUmlFunctions.h"
 #include "Libraries/mlcgi.h"
 #include <stdlib.h>
@@ -66,34 +66,38 @@ main (int argc, char *argv[])
   printf("</head>\n");
   printf("<body>\n");
   printf("  <div align=\"center\">\n");
-  printf("    <a href=\"./fcssUmlMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
+  printf("    <a href=\"./fcssUmlCgiMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                   stringConfigurationFileName,
                                                                                   stringLanguage,
-                                                                                  cgiText[language][19] );
+                                                                                  FcssUmlGetCliUserInterfaceMessage(language, 19) );
+
   printf("    <a href=\"./fcssUmlMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
-                                                                                    cgiText[language][0] );
+                                                                                    FcssUmlGetCliUserInterfaceMessage(language, 0) );
+
   printf("    <a href=\"./fcssUmlShowRequestRegistrationForm.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
-                                                                                    cgiText[language][1] );
-  printf("    <a href=\"resetPassword\">%s</a>\n", cgiText[language][2]);
+                                                                                    FcssUmlGetCliUserInterfaceMessage(language, 1) );
+                                                                                  
+  printf("    <a href=\"resetPassword\">%s</a>\n", FcssUmlGetCliUserInterfaceMessage(language, 2) );
   printf("    <a href=\"./fcssUmlShowWebHelp.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
-                                                                                    cgiText[language][3] );
+                                                                                    FcssUmlGetCliUserInterfaceMessage(language, 3) );
+                                                                                    
   printf("    <a href=\"./fcssUmlShowLicense.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
-                                                                                    cgiText[language][4] );
+                                                                                    FcssUmlGetCliUserInterfaceMessage(language, 4) );
   printf("  </div>\n");
   printf("  <div align=\"center\">\n");
-  printf("    %s\n", cgiText[language][15]);
+  printf("    %s\n", FcssUmlGetCliUserInterfaceMessage(language, 15) );
   printf("  </div>\n");
   printf("  <div align=\"center\" bgcolor=\"gray\">\n");
-  printf("    <br>%s<br>\n", cgiText[language][9]);
-  printf("    %s<br>\n", cgiText[language][10]);
+  printf("    <br>%s<br>\n", FcssUmlGetCliUserInterfaceMessage(language, 9) );
+  printf("    %s<br>\n", FcssUmlGetCliUserInterfaceMessage(language, 10) );
   printf("  </div>\n");
   printf("</body>\n");
   printf("</html>\n");

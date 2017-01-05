@@ -1,0 +1,9 @@
+A fazer:
+1)makefile com make uninstall e install que serve para qualquer sistema operacional
+2)Escrever as mensagens de erro no programa (OK)
+3)Colocar os tamanhos neste padrao: https://www.del.ufrj.br/pastas-das-disciplinas/eel270-computacao-ii/turma-2016-2/trabalho-final/definicao-dos-campos/
+4)Tratar os erros que nao foram tratados (QUAIS? -> NCURSES)
+5)colocar os enums no padrao lanza
+6)criar uma string para cada possivel argumento na cli no arquivo fcssUml
+7)comentar as funcoes do programa (OK)
+8)Arrumar os textos da interface em Ncurses

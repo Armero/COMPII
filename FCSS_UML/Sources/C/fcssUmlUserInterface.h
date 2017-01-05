@@ -13,6 +13,7 @@ $Log$
 #ifndef FCSSUMLUSERINTERFACE_H
 #define FCSSUMLUSERINTERFACE_H "@(#)fcssUmlUserInterface.h $Revisions$"
 #include "fcssUmlErrors.h"
+#include "fcssUmlTypes.h"
 
 
 char *

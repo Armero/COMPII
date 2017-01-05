@@ -15,7 +15,7 @@
 #include "fcssUmlConst.h"
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
-#include "fcssUmlCgiTexts.h"
+#include "fcssUmlUserInterface.h"
 #include "fcssUmlFunctions.h"
 #include "Libraries/mlcgi.h"
 #include <stdlib.h>
@@ -70,31 +70,36 @@ main (int argc, char *argv[])
   printf("    <a href=\"./fcssUmlCgiMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                   stringConfigurationFileName,
                                                                                   stringLanguage,
-                                                                                  cgiText[language][19] );
+                                                                                  FcssUmlGetCliUserInterfaceMessage(language, 19) );
+
   printf("    <a href=\"./fcssUmlMain.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
-                                                                                    cgiText[language][0] );
+                                                                                    FcssUmlGetCliUserInterfaceMessage(language, 0) );
+
   printf("    <a href=\"./fcssUmlShowRequestRegistrationForm.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
-                                                                                    cgiText[language][1] );
-  printf("    <a href=\"resetPassword\">%s</a>\n", cgiText[language][2]);
+                                                                                    FcssUmlGetCliUserInterfaceMessage(language, 1) );
+                                                                                  
+  printf("    <a href=\"resetPassword\">%s</a>\n", FcssUmlGetCliUserInterfaceMessage(language, 2) );
   printf("    <a href=\"./fcssUmlShowWebHelp.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
-                                                                                    cgiText[language][3] );
+                                                                                    FcssUmlGetCliUserInterfaceMessage(language, 3) );
+                                                                                    
   printf("    <a href=\"./fcssUmlShowLicense.cgi?configurationFile=%s&language=%s\">%s</a>\n",
                                                                                     stringConfigurationFileName,
                                                                                     stringLanguage,
-                                                                                    cgiText[language][4] );
+                                                                                    FcssUmlGetCliUserInterfaceMessage(language, 4) );
+                                                                                    
   printf("  </div>\n");
   printf("  <div align=\"center\">\n");
   printf("    <form action=\"fcssUmlLogin.cgi\" method=\"post\"> \n");
   printf("      <table border=1 style=\"width:30%%\">\n");
   printf("        <tr>\n");
   printf("          <td>\n");
-  printf("            %s\n", cgiText[language][5]);
+  printf("            %s\n", FcssUmlGetCliUserInterfaceMessage(language, 5) );
   printf("          </td>\n");
   printf("          <td align=\"center\">\n");
   printf("            <input type=\"text\" name=\"username\" maxlength=256 size=20> <br>\n");
@@ -102,7 +107,7 @@ main (int argc, char *argv[])
   printf("        </tr>\n");
   printf("        <tr>\n");
   printf("          <td>\n");
-  printf("            %s\n", cgiText[language][6]);
+  printf("            %s\n", FcssUmlGetCliUserInterfaceMessage(language, 6) );
   printf("          </td>\n");
   printf("          <td align=\"center\">\n");
   printf("            <input type=\"password\" name=\"userPassword\" maxlength=127 size=20> <br>\n");
@@ -118,15 +123,15 @@ main (int argc, char *argv[])
   printf("      <table border=1 style=\"width:30%%\">\n");
   printf("        <tr>\n");
   printf("          <td align=\"center\">\n");
-  printf("            <input type=\"submit\" value=\"%s\"> <br>\n", cgiText[language][7]);
+  printf("            <input type=\"submit\" value=\"%s\"> <br>\n", FcssUmlGetCliUserInterfaceMessage(language, 7) );
   printf("          </td>\n");
   printf("        </tr>\n");
   printf("      </table>\n");
   printf("    </form>\n");
   printf("  </div>\n");
   printf("  <div align=\"center\" bgcolor=\"gray\">\n");
-  printf("    <br>%s<br>\n", cgiText[language][9]);
-  printf("    %s<br>\n", cgiText[language][10]);
+  printf("    <br>%s<br>\n", FcssUmlGetCliUserInterfaceMessage(language, 9) );
+  printf("    %s<br>\n", FcssUmlGetCliUserInterfaceMessage(language, 10) );
   printf("  </div>\n");
   printf("</body>\n");
   printf("</html>\n");

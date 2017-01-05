@@ -23,7 +23,7 @@ $Log$
 #define	FCSS_UML_EMAIL_LENGTH												1024
 #define FCSS_UML_FILENAME_LENGTH										1024
 #define FCSS_UML_NUMBER_LENGTH											10
-#define FCSS_UML_DEFAULT_LINE_LENGTH								1024
+#define FCSS_UML_DEFAULT_LINE_LENGTH								4096
 #define FCSS_UML_OPTION_NAME_LENGTH									20
 #define FCSS_UML_LANGUAGE_NAME_MAX_LENGTH						20
 
@@ -50,6 +50,8 @@ $Log$
 #define FCSS_UML_SALT_LENGTH 												16
 
 #define FCSS_UML_RANDOM_STRING_VALID_CHARACTERS			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./"
+
+#define FCSS_UML_END_SUBOPTIONS 										"XDG"
 
 #define EOS 																				'\0'
 

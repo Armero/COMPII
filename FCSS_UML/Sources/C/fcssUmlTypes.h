@@ -63,6 +63,7 @@ typedef struct
 
 typedef enum 
 {
+	EMPTY,
 	HELP,
 	ADD_USER,
 	NCURSES,

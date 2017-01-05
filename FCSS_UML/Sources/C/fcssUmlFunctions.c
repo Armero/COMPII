@@ -133,7 +133,7 @@ FcssUmlGetStringOptionFromFile (FILE *configurationFile, char *temporaryString, 
 	{
 		if (!strncmp(temporaryBuffer, defaultOptions[index], memberLength))
 		{
-			stringIndex ++; /*after the equal sign*/
+			stringIndex ++;
 			while (temporaryBuffer[stringIndex]) 
 			{
 				temporaryString[auxiliaryIndex] = temporaryBuffer[stringIndex];
@@ -163,13 +163,10 @@ FcssUmlCheckStringField (char *stringInput, char *validChars, size_t minimumLeng
 	boolean isValidString = true;
 
 	if ((!stringInput) || (!validChars))
-	{
-		//return (2);
-	}
+		return (FCSS_UML_EMPTY_STRING);
+
 	if ( (stringLength < minimumLength) || (stringLength > maximumLegth) )
-	{
-		//return (1);
-	}
+		return (FCSS_UML_STRING_WITH_INVALID_LENGTH);
 
 	index = 0;
 	while (stringInput[index])
@@ -179,19 +176,19 @@ FcssUmlCheckStringField (char *stringInput, char *validChars, size_t minimumLeng
 		while (validChars[auxIndex])
 		{
 			if (stringInput[index] == validChars[auxIndex])
-			{
 				isValidChar = true;
-			}
+
 			auxIndex++;
 			if ( (!validChars[auxIndex]) && (!isValidChar))
 				isValidString = false;
 		}
 		index++;
 	}
-	if (!isValidString)
-		return(3);
 
-	return (0);
+	if (!isValidString)
+		return(FCSS_UML_STRING_WITH_INVALID_CONTENT);
+
+	return (FCSS_UML_OK);
 }
 
 fcssUmlErrorType
@@ -204,13 +201,10 @@ FcssUmlCheckNickname (char *stringInput, char *validChars, size_t minimumLength,
 	boolean isValidString = true;
 
 	if ((!stringInput) || (!validChars))
-	{
-		//return (2);
-	}
+		return (FCSS_UML_EMPTY_STRING);
+
 	if ( (stringLength < minimumLength) || (stringLength > maximumLegth) )
-	{
-		//return (1);
-	}
+		return (FCSS_UML_STRING_WITH_INVALID_LENGTH);
 
 	index = 0;
 	while (stringInput[index])
@@ -236,13 +230,11 @@ FcssUmlCheckNickname (char *stringInput, char *validChars, size_t minimumLength,
 		index++;
 	}
 	if (!isValidString)
-		//return(3);
+		return(FCSS_UML_STRING_WITH_INVALID_CONTENT);
 
 	printf("cont: %d\n", specialCharCounter );
 	if (specialCharCounter != 1)
-	{
-		//return(4);
-	}
+		return(FCSS_UML_INVALID_NICKNAME);
 
 	return (FCSS_UML_OK);
 } 
@@ -257,13 +249,10 @@ FcssumlCheckEmail (char *stringInput, char *validChars, size_t minimumLength, si
 	boolean isValidString = true;
 
 	if ((!stringInput) || (!validChars))
-	{
-		//return (2);
-	}
+		return (FCSS_UML_EMPTY_STRING);
+
 	if ( (stringLength < minimumLength) || (stringLength > maximumLegth) )
-	{
-		//return (1);
-	}
+		return (FCSS_UML_STRING_WITH_INVALID_LENGTH);
 
 	index = 0;
 	while (stringInput[index])
@@ -289,12 +278,12 @@ FcssumlCheckEmail (char *stringInput, char *validChars, size_t minimumLength, si
 		index++;
 	}
 	if (!isValidString)
-		//return(3);
+		return(FCSS_UML_STRING_WITH_INVALID_CONTENT);
 
 	printf("cont: %d\n", specialCharCounter );
 	if (specialCharCounter != 1)
 	{
-		//return(4);
+		return(FCSS_UML_INVALID_EMAIL);
 	}
 
 	return (FCSS_UML_OK);
@@ -307,9 +296,8 @@ FcssUmlCreateRandomString (char *validChars, size_t length, char *outputString)
 	unsigned index = 0;
 
 	if (!validChars)
-	{
-		return(1);
-	}
+		return (FCSS_UML_EMPTY_STRING);
+
 	srand(time(NULL));
 	while (index <= length)
 	{
@@ -332,9 +320,7 @@ FcssUmlCreateNickname (char *fullName, char *firstOption, char *secondOption)
 
 
 	if (!fullName)
-	{
-		//return(1);
-	}
+		return (FCSS_UML_EMPTY_STRING);
 
 	lastName[0] = EOS;
 	otherName[0] = EOS;
@@ -370,7 +356,7 @@ FcssUmlCreateNickname (char *fullName, char *firstOption, char *secondOption)
 	{
 		firstOption[0] = EOS;
 		secondOption[0] = EOS;
-		return (2);
+		return (FCSS_UML_NOT_FULL_NAME);
 	}
 
 	if (!strlen(otherName))
@@ -389,9 +375,7 @@ FcssUmlGetCryptAlgorithm (char *passwordString, fcssUmlCryptAlgorithms *algorith
 	
 
 	if (!passwordString)
-	{
-		return (1); // not a valid string
-	}
+		return (FCSS_UML_EMPTY_STRING);
 
 	lengthPasswordString = strlen(passwordString);
 
@@ -419,9 +403,7 @@ FcssUmlEncodePasswordWithSpecificAlgorithm (char *plainPassword, fcssUmlCryptAlg
 	FcssUmlCreateRandomString (FCSS_UML_RANDOM_STRING_VALID_CHARACTERS, FCSS_UML_SALT_LENGTH, saltPart);
 
 	if (!plainPassword)
-	{
-		return(1); //not a valid string
-	}
+		return (FCSS_UML_EMPTY_STRING);
 
 	switch(algorithmType)
 	{
@@ -453,11 +435,8 @@ fcssUmlErrorType
 FcssUmlEncodePasswordWithSpecificSalt (char *plainPassword, char *salt, char *encodedPassword)
 {
 	char *stringBuffer;
-	if (!plainPassword)
-		return(1);
-
-	if (!salt)
-		return(2);
+	if ( (!plainPassword)  || (!salt) ) 
+		return (FCSS_UML_EMPTY_STRING);
 
 	stringBuffer = crypt(plainPassword, salt);
 	strcpy(encodedPassword, stringBuffer);
@@ -473,6 +452,9 @@ FcssUmlCheckPassword (char *plainPassword, char *encodedPassword)
 	unsigned counter = 1;
 	unsigned index = 4;
 	char temporaryPassword[FCSS_UML_PASSWORD_LENGTH + 1];
+
+	if ((!plainPassword) || (!encodedPassword))
+		return(FCSS_UML_EMPTY_STRING);
 
 	char salt [FCSS_UML_SALT_LENGTH + 1];
 	if (encodedPassword[0] != '$')
@@ -492,12 +474,74 @@ FcssUmlCheckPassword (char *plainPassword, char *encodedPassword)
 	
 	FcssUmlEncodePasswordWithSpecificSalt(plainPassword, salt, temporaryPassword);
 	if (strcmp(temporaryPassword, encodedPassword))
-	{
-		return(1);
-	}
+		return (FCSS_UML_WRONG_PASSWORD);
 
 	return (FCSS_UML_OK);
 }
+
+void 
+FcssUmlInitializeNcursesWindows		(WINDOW **menu, WINDOW **topBar, WINDOW **footer, int heightBar, int widthBar, int numberOfColumns, int numberOfRows)
+{
+	*topBar = newwin (heightBar, widthBar - 5, 1, 1);
+	*footer = newwin (heightBar + 4, widthBar - 5, numberOfRows - 6, 1);
+	*menu =   newwin (numberOfRows, numberOfColumns, 0, 0);
+}
+
+void 
+FcssUmlDrawNcursesMenu(WINDOW *menu, int highlight, int n_choices, fcssUmlLanguageType language, char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS])
+{
+	int row, column, index;	
+
+	row = 2;
+	column = 3;
+	box(menu, 0, 0);
+	for(index = 0; index < n_choices; ++index)
+	{	
+		if(highlight == index + 1) /* Highlight the present choice */
+		{	wattron(menu, A_REVERSE); 
+			mvwprintw(menu, column, row, "%s", choices[language][index]);
+			wattroff(menu, A_REVERSE);
+		}
+		else
+			mvwprintw(menu, column, row, "%s", choices[language][index]);
+		column++;
+	}
+	wrefresh(menu);
+}
+
+void 
+FcssUmlDrawNcursesTopBar (WINDOW *topBar, int numberOfColumns, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT])
+{
+	int centerX = (numberOfColumns/2) - (strlen(extraText[language][0])/2);
+
+	wclear(topBar);
+	wbkgd(topBar, COLOR_PAIR(1));
+	mvwprintw(topBar, 0, centerX, "%s", extraText[language][0]);
+	wrefresh(topBar);
+}
+
+void 
+FcssUmlDrawNcursesFooter (WINDOW *footer, int numberOfColumns, int numberOfRows, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT])
+{
+	int centerX = (numberOfColumns/2) - (strlen(extraText[language][1])/2);
+
+	wclear(footer);
+	wbkgd(footer, COLOR_PAIR(1));
+	mvwprintw(footer, 0, centerX, extraText[language][1]);
+	mvwprintw(footer, 1, centerX, extraText[language][2]);
+	mvwprintw(footer, 4, centerX, "%s", extraText[language][3]);
+	curs_set(0);
+	wrefresh(footer);
+}
+
+void 
+FcssUmlCloseNcursesInterface  ()
+{
+	clrtoeol();
+	refresh();
+	endwin();
+}
+
 
 /* $RCSfile$ */
 
