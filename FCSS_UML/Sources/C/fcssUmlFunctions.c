@@ -488,48 +488,48 @@ FcssUmlInitializeNcursesWindows		(WINDOW **menu, WINDOW **topBar, WINDOW **foote
 }
 
 void 
-FcssUmlDrawNcursesMenu(WINDOW *menu, int highlight, int n_choices, fcssUmlLanguageType language, char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS])
+FcssUmlDrawNcursesMenu(WINDOW *menu, int highlight, int choices, fcssUmlLanguageType language)
 {
 	int row, column, index;	
 
 	row = 2;
 	column = 3;
 	box(menu, 0, 0);
-	for(index = 0; index < n_choices; ++index)
+	for(index = 0; index < choices; ++index)
 	{	
 		if(highlight == index + 1) /* Highlight the present choice */
 		{	wattron(menu, A_REVERSE); 
-			mvwprintw(menu, column, row, "%s", choices[language][index]);
+			mvwprintw(menu, column, row, "%s", FcssUmlGetNcursesUserInterfaceMessage(index, language));
 			wattroff(menu, A_REVERSE);
 		}
 		else
-			mvwprintw(menu, column, row, "%s", choices[language][index]);
+			mvwprintw(menu, column, row, "%s", FcssUmlGetNcursesUserInterfaceMessage(index, language));
 		column++;
 	}
 	wrefresh(menu);
 }
 
 void 
-FcssUmlDrawNcursesTopBar (WINDOW *topBar, int numberOfColumns, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT])
+FcssUmlDrawNcursesTopBar (WINDOW *topBar, int numberOfColumns, fcssUmlLanguageType language)
 {
-	int centerX = (numberOfColumns/2) - (strlen(extraText[language][0])/2);
+	int centerX = (numberOfColumns/2) - (strlen(FcssUmlGetNcursesUserInterfaceMessage(FCSS_UML_NCURSES_MAIN_TEXTS - 4,language))/2);
 
 	wclear(topBar);
 	wbkgd(topBar, COLOR_PAIR(1));
-	mvwprintw(topBar, 0, centerX, "%s", extraText[language][0]);
+	mvwprintw(topBar, 0, centerX, "%s", FcssUmlGetNcursesUserInterfaceMessage(FCSS_UML_NCURSES_MAIN_TEXTS - 4,language));
 	wrefresh(topBar);
 }
 
 void 
-FcssUmlDrawNcursesFooter (WINDOW *footer, int numberOfColumns, int numberOfRows, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT])
+FcssUmlDrawNcursesFooter (WINDOW *footer, int numberOfColumns, int numberOfRows, fcssUmlLanguageType language)
 {
-	int centerX = (numberOfColumns/2) - (strlen(extraText[language][1])/2);
+	int centerX = (numberOfColumns/2) - (strlen(FcssUmlGetNcursesUserInterfaceMessage(FCSS_UML_NCURSES_MAIN_TEXTS - 3,language))/2);
 
 	wclear(footer);
 	wbkgd(footer, COLOR_PAIR(1));
-	mvwprintw(footer, 0, centerX, extraText[language][1]);
-	mvwprintw(footer, 1, centerX, extraText[language][2]);
-	mvwprintw(footer, 4, centerX, "%s", extraText[language][3]);
+	mvwprintw(footer, 0, centerX, FcssUmlGetNcursesUserInterfaceMessage(FCSS_UML_NCURSES_MAIN_TEXTS - 3,language));
+	mvwprintw(footer, 1, centerX, FcssUmlGetNcursesUserInterfaceMessage(FCSS_UML_NCURSES_MAIN_TEXTS - 2,language));
+	mvwprintw(footer, 4, centerX, "%s", FcssUmlGetNcursesUserInterfaceMessage(FCSS_UML_NCURSES_MAIN_TEXTS - 1,language));
 	curs_set(0);
 	wrefresh(footer);
 }

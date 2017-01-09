@@ -19,11 +19,10 @@ FcssUmlShowNcursesHelp (fcssUmlConfigurationOptionsType *option, fcssUmlLanguage
 
 	char *programText[fcssUmlLanguagesAmount][FCSS_UML_TEXT_AMOUNT] =
 	{
-		{
-			"This should help!",
+		{"Generic help text",
 		},
 		{
-			"Isto deveria ajudar!",
+			"Texto generico de ajuda",
 		}
 	};	
 

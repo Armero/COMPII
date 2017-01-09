@@ -28,3 +28,4 @@ FcssUmlGetWebUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message
 #endif
 
 /* $RCSfile$ */
+

@@ -25,35 +25,6 @@ FcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOption
 	int widthBar;
 	int numberOfRows, numberOfColumns;
 	boolean closeInterface = false;
-	char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS] = 
-	{ 
-		{
-			"Help",
-			"Add User",
-			"Exit",
-		},
-		{
-			"Ajuda",
-			"Adicionar Usuario",
-			"Sair",
-		}
-  };
-
-	char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT] = 
-	{ 
-		{
-			"User Management Library",
-			"Use UP ARROW and DOWN ARROW to select an option",
-			"Use Enter to select an option",
-			"Designed by: Felipe Claudio da Silva Santos",
-		},
-		{
-			"Biblioteca de Gerenciamento de Usarios",
-			"Use as setas CIMA/BAIXO para selecionar uma opcao",
-			"Use enter para selecionar uma opcao",
-			"Feito por: Felipe Claudio da Silva Santos",
-		}
-  };
 
   const unsigned numberOfChoices = FCSS_UML_NCURSES_NUMBER_OF_OPTIONS;
 	numberOfRows = NCURSES_NUMBER_OF_ROWS;
@@ -72,9 +43,9 @@ FcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOption
 
 	while(!closeInterface)
 	{	
-		FcssUmlDrawNcursesMenu		(menu, highlight, numberOfChoices, language, choices);
-		FcssUmlDrawNcursesTopBar 	(topBar, numberOfColumns, language, extraText);
-		FcssUmlDrawNcursesFooter 	(footer, numberOfColumns, numberOfRows, language, extraText);
+		FcssUmlDrawNcursesMenu		(menu, highlight, numberOfChoices, language);
+		FcssUmlDrawNcursesTopBar 	(topBar, numberOfColumns, language);
+		FcssUmlDrawNcursesFooter 	(footer, numberOfColumns, numberOfRows, language);
 		keyboard = wgetch(menu);
 		switch(keyboard)
 		{	

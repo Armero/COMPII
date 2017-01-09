@@ -41,7 +41,7 @@ main (int argc, char *argv[])
   fcssUmlUserDataType user;
   boolean endOptions = 0;
   char fcssUmlConfigurationFileName[FCSS_UML_FILENAME_LENGTH + 1];
-  char *bufferPassword;
+  /*char *bufferPassword;*/
 
 
   static struct option longOptions [] =
@@ -85,16 +85,16 @@ main (int argc, char *argv[])
     exit (umlError);
   }
 
-  // printf("root dir: %s\n",configurationOptions->rootDirectory);
-  // printf("data dir: %s\n",configurationOptions->dataDirectory);
-  // printf("cookies dir: %s\n",configurationOptions->cookiesDirectory);
-  // printf("admin id dir: %llu\n",configurationOptions->administratorIdentifier);
-  // printf("adminEmail dir: %s\n",configurationOptions->administratorEmail);
-  // printf("privateRootDirectory dir: %s\n",configurationOptions->privateRootDirectory);
-  // printf("usersDataFileName dir: %s\n",configurationOptions->usersDataFileName);
-  // printf("invitedUsersDataFileName dir: %s\n",configurationOptions->invitedUsersDataFileName);
-  // printf("requestingUsersDataFilename dir: %s\n",configurationOptions->requestingUsersDataFilename);
-  // printf("lockedUsersDataFileName dir: %s\n",configurationOptions->lockedUsersDataFileName);
+  printf("root dir: %s\n",configurationOptions->rootDirectory);
+  printf("data dir: %s\n",configurationOptions->dataDirectory);
+  printf("cookies dir: %s\n",configurationOptions->cookiesDirectory);
+  printf("admin id dir: %llu\n",configurationOptions->administratorIdentifier);
+  printf("adminEmail dir: %s\n",configurationOptions->administratorEmail);
+  printf("privateRootDirectory dir: %s\n",configurationOptions->privateRootDirectory);
+  printf("usersDataFileName dir: %s\n",configurationOptions->usersDataFileName);
+  printf("invitedUsersDataFileName dir: %s\n",configurationOptions->invitedUsersDataFileName);
+  printf("requestingUsersDataFilename dir: %s\n",configurationOptions->requestingUsersDataFilename);
+  printf("lockedUsersDataFileName dir: %s\n",configurationOptions->lockedUsersDataFileName);
 
   user.identifier = 0;
   user.nickName[0] = EOS;
@@ -151,7 +151,6 @@ main (int argc, char *argv[])
         {
           while ((*subopts != '\0') && (!endOptions))
           { 
-            printf("AQUI\n");
             switch (getsubopt(&subopts, subOptions, &value))
             {
               case (LANGUAGE):
@@ -210,20 +209,16 @@ main (int argc, char *argv[])
  		}
  	} 
 
-  printf("umlError: %d\n", (int) umlError);
-  printf("languageChoice: %d\n", (int) languageChoice);
-  printf("errorAmount: %d\n", FCSS_UML_ERROR_AMOUNT);
-
   if (umlError)
   {
     printf("%s\n", FcssUmlGetCliErrorMessage(languageChoice, umlError));
     exit(umlError);
   }
-  // printf("\n\n\n");
-  // printf("user.username: %s\n", user.fullName);
-  // printf("user.usernameConfirmation: %s\n", user.fullNameConfirmation);
-  // printf("user.email: %s\n", user.email);
-  // printf("user.emailConfirmation: %s\n", user.emailConfirmation);
+  printf("\n\n\n");
+  printf("user.username: %s\n", user.fullName);
+  printf("user.usernameConfirmation: %s\n", user.fullNameConfirmation);
+  printf("user.email: %s\n", user.email);
+  printf("user.emailConfirmation: %s\n", user.emailConfirmation);
 
   /*Must be inside fcssUmlAddUser*/
   // if ( ((fcssUmlUserIdentifierType) getuid()) == configurationOptions->administratorIdentifier)
@@ -268,3 +263,4 @@ main (int argc, char *argv[])
 
 
 /* $RCSfile$ */
+

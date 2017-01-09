@@ -14,8 +14,8 @@ $Log$
 
 #include "fcssUmlTypes.h"
 #include "fcssUmlErrors.h"
-#include "fcssUmlNcursesFunctions.h"
 #include "fcssUmlShowNcursesHelp.h"
+#include "fcssUmlFunctions.h"
 #include <ncurses.h>
 #include <string.h>
 #include <stdlib.h>
@@ -30,3 +30,4 @@ FcssUmlRunNcursesInterface (fcssUmlConfigurationOptionsType *configurationOption
 #endif
 
 /* $RCSfile$ */
+

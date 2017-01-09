@@ -17,12 +17,12 @@ FcssUmlShowCliHelp (fcssUmlConfigurationOptionsType *option, fcssUmlLanguageType
 {
 	if (language == fcssUmlEnglish)
 	{
-		printf("It works!\n");
+		printf("Generic help text\n");
 	}
 
 	if (language == fcssUmlPortuguese)
 	{
-		printf("Funciona!\n");
+		printf("Texto generico de ajuda\n");
 	}	
 	/*to complete*/
 } 

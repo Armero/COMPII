@@ -12,24 +12,36 @@ $Log$
 
 #include "fcssUmlUserInterface.h"
 
-char *fcssUmlCliUserInterfaceMessages [fcssUmlLanguagesAmount][1] = 
+char *fcssUmlCliUserInterfaceMessages [fcssUmlLanguagesAmount][FCSS_UML_CLI_MAIN_TEXTS] = 
 {
 	{
-		"OK",
+		"OK"
 	},
 	{
-		"Sucesso",
+		"Sucesso"
 	}
 };
 
-char *fcssUmlNcursesUserInterfaceMessages [fcssUmlLanguagesAmount][1] = 
-{
-	{
-		"OK",
-	},
-	{
-		"Sucesso",
-	}
+char *fcssUmlNcursesUserInterfaceMessages [fcssUmlLanguagesAmount][FCSS_UML_NCURSES_MAIN_TEXTS] = 
+{ 
+    {
+        "Help",
+        "Add User",
+        "Exit",
+        "User Management Library",
+        "Use UP ARROW and DOWN ARROW to select an option",
+        "Use Enter to select an option",
+        "Designed by: Felipe Claudio da Silva Santos"
+    },
+    {
+        "Ajuda",
+        "Adicionar Usuario",
+        "Sair",
+        "Biblioteca de Gerenciamento de Usarios",
+        "Use as setas CIMA/BAIXO para selecionar uma opcao",
+        "Use enter para selecionar uma opcao",
+        "Feito por: Felipe Claudio da Silva Santos"
+    }
 };
 
 char *fcssUmlCgiUserInterfaceMessages [fcssUmlLanguagesAmount][FCSS_UML_CGI_MAIN_TEXTS] = 
@@ -83,19 +95,19 @@ char *fcssUmlCgiUserInterfaceMessages [fcssUmlLanguagesAmount][FCSS_UML_CGI_MAIN
 char *
 FcssUmlGetCliUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
-	return (fcssUmlCliUserInterfaceMessages[message][language]);
+	return (fcssUmlCliUserInterfaceMessages[language][message]);
 }
 
 char *
 FcssUmlGetNcursesUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
-	return (fcssUmlNcursesUserInterfaceMessages[message][language]);
+	return (fcssUmlNcursesUserInterfaceMessages[language][message]);
 }
 
 char *
 FcssUmlGetWebUserInterfaceMessage (fcssUmlUserInterfaceMessageNumberType message, fcssUmlLanguageType language)
 {
-	return (fcssUmlCgiUserInterfaceMessages[message][language]);
+	return (fcssUmlCgiUserInterfaceMessages[language][message]);
 }
 
 /* $RCSfile$ */

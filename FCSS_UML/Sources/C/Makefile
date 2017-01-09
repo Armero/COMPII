@@ -110,16 +110,16 @@ REMOVEDIRS = rm -r ../../Binaries/;\
 						 rm -r ../../Cookies/;\
 						 rm -r $(PUBLICHTMLDIR);\
 
+REMOVECGIS = rm -r /users/felipe.santos/public/html/EEL270/2016-2/FCSS_UML/CGIs/*
+
 COPYFILESUML = cp -r ../HTML/ $(PUBLICHTMLDIR)
 
-
-#Regra implicita
 .c.o:
 	$(CC)	$(CFLAGS)	-c	$<
 
-#Regra geral
-#O $@ chama todos os .o necessarios paraera o executavel correspondentes
 all:	$(ALL)
+
+install: install_FreeBSD
 
 install_CentOS: directoryCreation buildAllFilesCentOS copyFiles linkHtmlIndex
 
@@ -149,19 +149,19 @@ fcssUmlCgiCentOS:	mlcgiCentOS $(CGITARGETS);
 fcssUmlCgiFreeBSD: mlcgiFreeBSD $(CGITARGETS);
 
 fcssUmlCgiMain: $(FCSSUMLCGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECMAINCGI)	$(FCSSUMLMAINCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECMAINCGI) $(PUBLICCGIDIR);
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECMAINCGI)	$(FCSSUMLMAINCGIOBJS)	-L./Libraries/ 	-lmlcgi 	$(AFLAGS); cp $(FCSSUMLEXECMAINCGI) $(PUBLICCGIDIR);
 
 fcssUmlCgiLanguage: $(FCSSUMLLANGUAGECGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECLANGUAGECGI)	$(FCSSUMLLANGUAGECGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECLANGUAGECGI) $(PUBLICCGIDIR);
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECLANGUAGECGI)	$(FCSSUMLLANGUAGECGIOBJS)	-L./Libraries/ 	-lmlcgi 	$(AFLAGS); cp $(FCSSUMLEXECLANGUAGECGI) $(PUBLICCGIDIR);
 
 fcssUmlCgiForm: $(FCSSUMLFORMCGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECFORMCGI)	$(FCSSUMLFORMCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECFORMCGI) $(PUBLICCGIDIR);
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECFORMCGI)	$(FCSSUMLFORMCGIOBJS)	-L./Libraries/ 	-lmlcgi 	$(AFLAGS); cp $(FCSSUMLEXECFORMCGI) $(PUBLICCGIDIR);
 
 fcssUmlCgiHelp: $(FCSSUMLHELPCGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECHELPCGI)	$(FCSSUMLHELPCGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECHELPCGI) $(PUBLICCGIDIR);	
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECHELPCGI)	$(FCSSUMLHELPCGIOBJS)	-L./Libraries/ 	-lmlcgi 	$(AFLAGS); cp $(FCSSUMLEXECHELPCGI) $(PUBLICCGIDIR);	
 
 fcssUmlCgiLicense: $(FCSSUMLLICENSECGIOBJS)
-	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECLICESNSECGI)	$(FCSSUMLLICENSECGIOBJS)	-L./Libraries/ 	-lmlcgi; cp $(FCSSUMLEXECLICESNSECGI) $(PUBLICCGIDIR);	
+	$(LD)	$(LFLAGS)	-o 	$(FCSSUMLEXECLICESNSECGI)	$(FCSSUMLLICENSECGIOBJS)	-L./Libraries/ 	-lmlcgi 	$(AFLAGS); cp $(FCSSUMLEXECLICESNSECGI) $(PUBLICCGIDIR);	
 
 mlcgiCentOS:
 	cd 	$(LIBSDIR);	ln 	-s 	$(LIBMLCGICENTOS)	$(LIBMLCGI);	cd 	..;
@@ -170,7 +170,7 @@ mlcgiFreeBSD:
 	cd 	$(FCSSUMLLIBSDIR);	ln 	-s 	$(LIBMLCGIFREEBSD)	$(LIBMLCGI);	cd 	..;
 
 removeAll: clean
-	$(REMOVEDIRS) clear;
+	$(REMOVEDIRS) $(REMOVECGIS);
 
 clean:
 	rm -f $(FCSSUMLEXECS) $(FCSSUMLOBJS) $(FCSSUMLEXTERNLIBS)

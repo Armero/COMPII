@@ -13,14 +13,15 @@ $Log$
 #ifndef FCSSUMLFUNCTIONS_H
 #define FCSSUMLFUNCTIONS_H "@(#)fcssUmlFunctions.h $Revisions$"
 
-#define _XOPEN_SOURCE	500
+/*#define _XOPEN_SOURCE	500*/
 #include <unistd.h>
-#define _GNU_SOURCE
-#include <crypt.h>
+/*#define _GNU_SOURCE*/
+/*#include <crypt.h>*/
 #include "fcssUmlTypes.h"
 #include "fcssUmlConst.h"
 #include "fcssUmlErrors.h"
 #include "fcssUmlConfig.h"
+#include "fcssUmlUserInterface.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -297,11 +298,10 @@ FcssUmlInitializeNcursesWindows				(WINDOW **menu, WINDOW **topBar, WINDOW **foo
  *			char *highlight (input) - option to highlight
  *      fcssUmlLangueType language (input) -  language to write the option
  *      int heightBar (input) - height of the bar present in **topBar and **footer
- *      char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS] (input) - text to be printed
  * 
  */
 void 
-FcssUmlDrawNcursesMenu								(WINDOW *menu, int highlight, int n_choices, fcssUmlLanguageType language, char *choices[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS]);
+FcssUmlDrawNcursesMenu								(WINDOW *menu, int highlight, int n_choices, fcssUmlLanguageType language);
 
 
 /*---------------------------------------------------------------------------*/
@@ -312,11 +312,10 @@ FcssUmlDrawNcursesMenu								(WINDOW *menu, int highlight, int n_choices, fcssU
  *      char *menu  (input) - main screen
  *			int numberOfColumns (input) - number of columns used by interface
  *      fcssUmlLangueType language (input) -  language to write the option
- *      char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS] (input) - text to be printed
  * 
  */
 void 
-FcssUmlDrawNcursesTopBar 							(WINDOW *topBar, int numberOfColumns, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT]);
+FcssUmlDrawNcursesTopBar 							(WINDOW *topBar, int numberOfColumns, fcssUmlLanguageType language);
 
 /*---------------------------------------------------------------------------*/
 /*
@@ -327,11 +326,10 @@ FcssUmlDrawNcursesTopBar 							(WINDOW *topBar, int numberOfColumns, fcssUmlLan
  *			int numberOfColumns (input) - number of columns used by interface
  *			int numberOfRows (input) - number of rows used by interface
  *      fcssUmlLangueType language (input) -  language to write the option
- *      char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_OPTIONS] (input) - text to be printed
  * 
  */
 void 
-FcssUmlDrawNcursesFooter 							(WINDOW *footer, int numberOfColumns, int numberOfRows, fcssUmlLanguageType language, char *extraText[fcssUmlLanguagesAmount][FCSS_UML_NCURSES_NUMBER_OF_EXTRA_TEXT]);
+FcssUmlDrawNcursesFooter 							(WINDOW *footer, int numberOfColumns, int numberOfRows, fcssUmlLanguageType language);
 
 /*---------------------------------------------------------------------------*/
 /*
